@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPS</title>
+    <script src="jscode.js"></script>
+    <link rel="stylesheet" href="css/csscode.css">
+    <link rel="icon" href="icones/rock.svg">
+</head>
+<body onload="score_updater();">
+    <div class="game_title"><H1>Rock Paper Scissors</H1></div>
+    <div class="game_buttons">
+        <button onclick="rps.rock();"><img src="icones/rock.svg" alt="Rock"><p>Rock</p></button>
+        <button onclick="rps.paper();"><img src="icones/paper.svg" alt="Paper"><p>Paper</p></button>
+        <button onclick="rps.scissors();"><img src="icones/scissors.svg" alt="Scissors"><p>Scissors</p></button>
+    </div>
+    <ul class="score_text">You have :
+        <li><span class="wins_text"></span> wins</li>
+        <li><span class="loses_text"></span> loses</li>
+        <li><span class="ties_text"></span> ties</li>
+    </ul>
+    <div class="score_buttons">
+        <button onclick="score();"><p>Display Score</p></button>
+        <button onclick="resetScore();"><p>Reset Score</p></button>            
+    </div>
+    <p class="round_details">Chose <span>rock</span> , <span>paper</span> or <span>scissors</span> to play the game</p>
+    <div class="visual_result">
+        <img src="icones/user_icon.svg" alt="user_icon">
+        <span class="user_move_icon"></span>
+        <strong><u>VS</u></strong>
+        <span class="pc_move_icon"></span>
+        <img src="icones/computer_icon.svg" alt="pc_icon">
+    </div>
+    <div class="auto_pilote" ><button onclick="auto_pilote();">Auto Pilote</button></div>
+    <!--this button is for testing purposes only
+    <button id="testing" onclick="testing();">testing</button>
+    -->
+</body>
+</html>

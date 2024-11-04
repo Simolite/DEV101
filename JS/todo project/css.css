@@ -1,0 +1,90 @@
+body {
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: 10%;
+}
+.input_section {
+    display: flex;
+    justify-content: space-between;
+}
+.todoList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+p,main,.input_section,.todoList {
+    width: 100%;
+    display: flex;    
+}
+p {
+    justify-content: space-between;
+}
+.items,.input_1 {
+    width: 50%;
+}
+.add_button {
+    background-color: green;
+}
+.delete_button {
+    background-color: red;  
+}
+button {
+    border: none;
+    border-radius: 10px;
+    width: 70px;
+    max-height: 25px;
+    padding: 5px 10px;
+    background-color: rgb(220, 220, 220);
+}
+button,.input_1,.input_2:hover {
+    cursor: pointer;
+}
+.items_date {
+    text-decoration: underline;
+}
+.input_1,.input_2 {
+    border-radius: 10px;
+    border: solid;
+    border-color: rgb(37, 37, 37);
+}
+.items {
+    background-color: rgb(220, 220, 220);
+    padding: 10px;
+    border-radius: 5px;
+}
+@media (max-width: 720px){
+    main {
+        font-size: 10px;
+    }
+    h1 {
+        font-size: 18px;
+    }
+    .input_1,.input_2{
+        width: 20%;
+        border-width: 1px ;
+        font-size: 7px;
+    }
+    .input_1 {
+        width: 55%;
+        max-width: 180px;
+    }
+    button {
+        width: 40px;
+        height: 15px;
+        font-size: 7px;
+        padding: 0;
+    }
+}
+.testing_button {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+}

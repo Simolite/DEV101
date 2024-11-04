@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <script src="todo.js"></script>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body onload="list_HTML_updater ()">
+    <main>
+        <h1>Todo List</h1>
+        <div class="input_section">
+            <input class="input_1" type="Todo name" placeholder="Todo name">
+            <input class="input_2" type="date">
+            <button class="add_button" onclick="add_todo ()">Add</button>
+        </div>
+        <div class="todoList">
+        </div>
+        <div class="clear_all"></div>
+        <!--This is for testing only
+        <button class="testing_button" onclick="testing();">testing</button>
+        -->
+    </main>
+</body>
+</html>

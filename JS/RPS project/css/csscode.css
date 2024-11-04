@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+}
+button img {
+    width: 50px;
+    height: 50px;    
+}
+button p {
+    margin: 0;
+}
+button {
+    padding: 10px;
+    background-color: rgb(128, 128, 128);
+    border-radius: 5px;
+}
+.game_buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+    margin: 20px;
+}
+.score_buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+}
+H1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    color:red;
+}
+.score_text {
+    display: grid;
+    justify-content: center;
+}
+li {
+    color: red;
+}
+.round_details {
+    text-align: center;
+}
+.round_details span {
+    color: red;
+}
+.visual_result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+}
+.visual_result img {
+    width: 50px;
+    height: 50px;
+}
+.auto_pilote {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+#testing {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+}

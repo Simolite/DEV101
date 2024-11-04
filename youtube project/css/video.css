@@ -1,0 +1,105 @@
+.video_thumbnail_image img {
+    width: 100%;
+}
+.channel_profile_image {
+    width: 70%;
+    border-radius: 50%;
+    margin-left: 13%;
+    margin-top: 15%;
+}
+.video_bottom_left {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}   
+.video_bottom_right {
+    color: rgb(90, 90, 90);
+    display: inline-block;
+    line-height: 5px;
+}
+.videos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    column-gap: 1%;
+    row-gap: 2%;
+    padding: 20px;
+}
+.video_bottom {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    font-size: 12px;
+}
+.video_top {
+    position: relative;
+}
+.video_timer {
+    position: absolute;
+    right: 2%;
+    bottom: 5%;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 10%;
+    padding: 4px;
+    color: white;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+}
+.video_title p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+.video_title a {
+    text-decoration: none;
+    font-weight: 500;
+    line-height: 25px;
+    color: black;
+}
+.video_author a {
+    color: rgb(90, 90, 90);
+    text-decoration: none;
+}
+.channel_preview {
+    background-color: rgba(224, 224, 224,0.95);
+    position: absolute;    
+    z-index: 500;
+    border-radius: 5px;
+    bottom: -150px;
+    display: grid;
+    grid-template-columns: 1fr;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    width: 200px;
+}
+.channel_preview img {
+    width: 20%;
+    border-radius: 50%;
+    margin-left: 40%;
+    margin-top: 10px;
+}
+.channel_preview p {
+    text-decoration: none;
+    font-weight: 500;
+    line-height: 25px;
+    color: black;
+    padding: 10px 10px;
+    text-align: center;
+}
+.video_bottom_left:hover .channel_preview {
+    opacity: 1;
+}
+@media (max-width: 600px) {
+    .videos {
+        grid-template-columns: 1fr;
+    }   
+}
+@media (min-width: 1600px) {
+    .videos {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }   
+}
+@media (min-width: 601px) and (max-width: 1000px)  {
+    .videos {
+        grid-template-columns: 1fr 1fr;
+    }   
+}

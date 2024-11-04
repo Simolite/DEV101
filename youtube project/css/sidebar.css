@@ -1,0 +1,30 @@
+.side_bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: 50px;
+    width: 72px;
+    z-index: 200;
+    font-size: 11px;
+    padding-top: 5px;
+}
+.side_bar_link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 15%;
+    max-height: 74px;
+    min-height: 50px;
+}
+.side_bar_link img {
+    width: 24px;
+    margin-bottom: 10%;
+}
+.side_bar_link {
+    font-size: 10px;
+}
+.side_bar :hover {
+    background-color: rgb(225, 225, 225);
+    cursor: pointer;
+}
