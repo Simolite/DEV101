@@ -10,10 +10,10 @@ score_verify();
 function game(){
 if (Math.random()<=1/3){
     rdNum = 1;
-    pcMove = 'Rock';
+    pcMove = 'rock';
 } else if (Math.random()<=2/3){
     rdNum = 2;
-    pcMove = 'Paper';
+    pcMove = 'paper';
 } else {
     rdNum = 3;
     pcMove = 'scissors';
