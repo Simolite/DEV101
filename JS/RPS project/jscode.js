@@ -37,12 +37,12 @@ round_details ();
 return result,resultNum,userMove;
 };
 function rock(){
-userMove='Rock';
+userMove='rock';
 userNum=1;
 game();
 };
 function paper(){
-userMove='Paper';
+userMove='paper';
 userNum=2;
 game();
 };
