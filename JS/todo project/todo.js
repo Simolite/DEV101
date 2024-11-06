@@ -1,4 +1,4 @@
-let mem_list = JSON.parse(localStorage.getItem('toDoList'));
+let mem_list = JSON.parse(localStorage.getItem('toDoList'))||[{name:'Wellcome your todo list is empty',duedate:''}];
 let todo_list = mem_list;
 let todo_list_HTML = '';
 let html_text_input = '';
@@ -9,8 +9,8 @@ function list_HTML_updater (){
     document.querySelector('.todoList').innerHTML ="";
     todo_list.forEach(function (item,i){
         todo_list_HTML = `<p>
-        <span class="items">${todo_list[i].name}</span>
-        <span class="items_date">${todo_list[i].duedate}</span>
+        <span class="items">${item.name}</span>
+        <span class="items_date">${item.duedate}</span>
         <button class="delete_button" onclick="todo_list.splice(${i},1);list_HTML_updater ();"">Delete</button>
         </p>`;
         document.querySelector('.todoList').innerHTML +=todo_list_HTML;        
