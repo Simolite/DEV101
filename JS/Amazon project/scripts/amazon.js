@@ -66,9 +66,18 @@ function HTMLLoader(){
         }else{
           cart.push({productId:productId,quantity:1});
         };
+        cart_quan_updater();
       });
     });
 };
+function cart_quan_updater (){
+  let totalQ = 0;
+  cart.forEach((total) => {
+    totalQ += total.quantity;
+    return totalQ;
+  })
+  document.querySelector('.cart-quantity').innerHTML = totalQ;
+};
 function testing (){
-  console.log(cart);
+  console.log(totalQ);
 };
