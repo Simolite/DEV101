@@ -53,7 +53,7 @@ export const products = [
       stars: 5,
       count: 2197
     },
-    priceCents: 1899,
+    priceCents: 5899,
     keywords: [
       "toaster",
       "kitchen",
