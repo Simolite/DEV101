@@ -1,3 +1,6 @@
+import {cart} from "../data/cart.js";
+import {products} from "../data/products.js";
+let prodHTML;
 function HTMLLoader(){
     products.forEach((product) => {
       prodHTML = `
@@ -66,11 +69,11 @@ function HTMLLoader(){
         }else{
           cart.push({productId:productId,quantity:1});
         };
-        cart_quan_updater();
+        cart_quan_calculator();
       });
     });
 };
-function cart_quan_updater (){
+function cart_quan_calculator(){
   let totalQ = 0;
   cart.forEach((total) => {
     totalQ += total.quantity;
@@ -78,6 +81,5 @@ function cart_quan_updater (){
   })
   document.querySelector('.cart-quantity').innerHTML = totalQ;
 };
-function testing (){
-  console.log(totalQ);
-};
+document.querySelector('.testing_button').addEventListener('click',() => console.log(200))
+HTMLLoader();
