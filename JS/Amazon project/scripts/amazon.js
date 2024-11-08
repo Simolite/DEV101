@@ -1,4 +1,4 @@
-import {cart,addToCart} from "../data/cart.js";
+import {cart,addToCart,multiplayer_calculator} from "../data/cart.js";
 import {products} from "../data/products.js";
 function HTMLLoader(){
   let prodHTML;
@@ -27,7 +27,7 @@ function HTMLLoader(){
         </div>
 
         <div class="product-quantity-container">
-          <select>
+          <select class="quantity_selector" id="p${product.id}" data-productq-id="${product.id}">
             <option selected value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -54,7 +54,6 @@ function HTMLLoader(){
       </div>
     `
     document.querySelector(".products-grid").innerHTML += prodHTML;
-   
   });
   addToCart();
 };

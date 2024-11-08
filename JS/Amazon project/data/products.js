@@ -658,3 +658,6 @@ export const products = [
     ]
   }
 ];
+function dev101 (param){
+  alert(param)
+};
