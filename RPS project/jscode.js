@@ -105,6 +105,3 @@ function stop_auto_pilote(){
     alert(`The auto pilote played ${counter} times`);
     return counter = 0;
 };
-function testing(){
-    //this is here for testing functions just add it and press the testing button in top left
-};

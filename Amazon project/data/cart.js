@@ -1,19 +1,4 @@
-export let cart = [{
-  productId:"e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-  quantity:5
-},{
-  productId:"15b6fc6f-327a-4ec4-896f-486349e85a3d",
-  quantity:9  
-},{
-  productId:"77919bbe-0e56-475b-adde-4f24dfed3a04",
-  quantity:9  
-},{
-  productId:"8c9c52b5-5a19-4bcb-a5d1-158a74287c53",
-  quantity:9  
-},{
-  productId:"3ebe75dc-64d2-4137-8860-1f5a963e534b",
-  quantity:9  
-}];
+export let cart = JSON.parse(localStorage.getItem('localCart'));
 export function addToCart(){
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click' , () => {
@@ -28,13 +13,15 @@ export function addToCart(){
         matchProdId.quantity = matchProdId.quantity + Number(multiplayer);
       }else{
         cart.push({productId:productId,quantity:Number(multiplayer)});
+        localStorage.setItem('localCart',JSON.stringify(cart));
       };      
       cart_quan_calculator();
       document.querySelector(`#p${productId}`).value = 1;
-      multiplayer = 1;     
+      multiplayer = 1;    
     });
-    multiplayer_calculator ();
+    multiplayer_calculator (); 
   });
+  cart_quan_calculator();
 };
 export function multiplayer_calculator(){
   document.querySelectorAll('.quantity_selector').forEach((qbutton) => {
@@ -45,11 +32,6 @@ export function multiplayer_calculator(){
   })
   return multiplayer;
 };
- function cart_quan_calculator(){
-  let totalQ = 0;
-  cart.forEach((cartItem) => totalQ += cartItem.quantity)
-  document.querySelector('.cart-quantity').innerHTML=totalQ;
-};
 export function remove_from_cart (productId){
   let newCart = [];
   cart.forEach((cartItem)=>{
@@ -58,5 +40,11 @@ export function remove_from_cart (productId){
     }
   });
   cart = newCart;
+  localStorage.setItem('localCart',JSON.stringify(cart));
+};
+function cart_quan_calculator(){
+  let totalQ = 0;
+  cart.forEach((cartItem) => totalQ += cartItem.quantity)
+  document.querySelector('.cart-quantity').innerHTML=totalQ;
 };
 let multiplayer = 1;
