@@ -1,5 +1,6 @@
 import {cart,addToCart,multiplayer_calculator} from "../data/cart.js";
 import {products} from "../data/products.js";
+import {centsToDollars} from "../scripts/utils/money.js"
 function HTMLLoader(){
   let prodHTML;
   products.forEach((product) => {
@@ -23,9 +24,8 @@ function HTMLLoader(){
         </div>
 
         <div class="product-price">
-          $${(product.priceCents/100).toFixed(2)}
+          ${centsToDollars(product.priceCents)}
         </div>
-
         <div class="product-quantity-container">
           <select class="quantity_selector" id="p${product.id}" data-productq-id="${product.id}">
             <option selected value="1">1</option>
