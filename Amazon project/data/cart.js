@@ -1,4 +1,4 @@
-export let cart = JSON.parse(localStorage.getItem('localCart'));
+export let cart = JSON.parse(localStorage.getItem('localCart'))|| [{prodectId:'dd82ca78-a18b-4e2a-9250-31e67412f98d',quantity:0}];
 export function addToCart(){
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click' , () => {
