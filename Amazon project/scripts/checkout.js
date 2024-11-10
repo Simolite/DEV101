@@ -2,8 +2,7 @@ import { remove_from_cart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { centsToDollars } from "../scripts/utils/money.js";
 let cart = JSON.parse(localStorage.getItem('localCart'))|| [{prodectId:'default',quantity:0}];
-function SummaryHTMLLoader(){
-  document.querySelector('.checkout_number').innerHTML= cart.length-1
+function orderHTMLLoader(){
   cart = JSON.parse(localStorage.getItem('localCart'))|| [{prodectId:'default',quantity:0}];
     document.querySelector('.order-summary').innerHTML = "";
     cart.forEach((cartItem) => {
@@ -90,21 +89,46 @@ function SummaryHTMLLoader(){
             </div>
           </div>
         </div>
-        `;
-        
-        
+        `;       
     });
-    delete_loader();    
+    delete_loader();
+  document.querySelectorAll('.checkout_number').forEach((num)=>{num.innerHTML = cart.length-1;});
+  paymentHTMLLoader();  
 };
 function delete_loader(){
   cart.forEach((item)=>{
     if (!item.productId){return}else{
       document.getElementById(`p${item.productId}`).addEventListener('click',() =>{       
         remove_from_cart (item.productId);        
-        SummaryHTMLLoader();                       
+        orderHTMLLoader();                       
       })
     };
   })
 };
 document.querySelector('.place-order-button').addEventListener('click',()=>{console.log(200);});
-SummaryHTMLLoader();
+function paymentHTMLLoader(){
+  let items_total = 0;
+  let shipping_total = 0;
+  let total_bt = 0;
+  let est_tax = 0;
+  let grand_total = 0;
+  cart.forEach((cartItem) =>{
+    let matchingProduct;
+    products.forEach((product)=>{
+      if(product.id === cartItem.productId){
+          matchingProduct = product;                           
+      };            
+    });
+    if(!matchingProduct){return};
+    items_total+=matchingProduct.priceCents*cartItem.quantity;
+    total_bt = items_total+shipping_total;
+    est_tax = total_bt/10;
+    grand_total = total_bt+est_tax;
+  });
+  document.querySelector('.items_total').innerHTML = `${centsToDollars(items_total)}`;
+  document.querySelector('.shipping_total').innerHTML = `${centsToDollars(shipping_total)}`;
+  document.querySelector('.total_bt').innerHTML = `${centsToDollars(total_bt)}`;
+  document.querySelector('.est_tax').innerHTML = `${centsToDollars(est_tax)}`;
+  document.querySelector('.grand_total').innerHTML = `${centsToDollars(grand_total)}`;
+};
+orderHTMLLoader();
