@@ -1,15 +1,19 @@
-import { cart,remove_from_cart } from "../data/cart.js";
-import {products} from "../data/products.js";
-import {centsToDollars} from "../scripts/utils/money.js";
+import { remove_from_cart } from "../data/cart.js";
+import { products } from "../data/products.js";
+import { centsToDollars } from "../scripts/utils/money.js";
+let cart = JSON.parse(localStorage.getItem('localCart'))|| [{prodectId:'default',quantity:0}];
 function SummaryHTMLLoader(){
+  document.querySelector('.checkout_number').innerHTML= cart.length-1
+  cart = JSON.parse(localStorage.getItem('localCart'))|| [{prodectId:'default',quantity:0}];
     document.querySelector('.order-summary').innerHTML = "";
     cart.forEach((cartItem) => {
         let matchingProduct; 
         products.forEach((product)=>{
             if(product.id === cartItem.productId){
-                matchingProduct = product;            
-            };
-        });  
+                matchingProduct = product;                           
+            };            
+        });
+        if (!matchingProduct){return};
         document.querySelector('.order-summary').innerHTML +=`
         <div class="cart-item-container">
           <div class="delivery-date">
@@ -87,15 +91,20 @@ function SummaryHTMLLoader(){
           </div>
         </div>
         `;
+        
+        
     });
-    delete_loader();
+    delete_loader();    
 };
 function delete_loader(){
-    cart.forEach((item)=>{
-        document.getElementById(`p${item.productId}`).addEventListener('click',() =>{
-            remove_from_cart (item.productId);        
-            SummaryHTMLLoader();                
-        })
-    })
+  cart.forEach((item)=>{
+    if (!item.productId){return}else{
+      document.getElementById(`p${item.productId}`).addEventListener('click',() =>{       
+        remove_from_cart (item.productId);        
+        SummaryHTMLLoader();                       
+      })
+    };
+  })
 };
+document.querySelector('.place-order-button').addEventListener('click',()=>{console.log(200);});
 SummaryHTMLLoader();
