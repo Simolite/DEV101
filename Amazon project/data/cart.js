@@ -1,4 +1,5 @@
 export let cart = JSON.parse(localStorage.getItem('localCart'))|| [{prodectId:'default',quantity:0}];
+let deleveryOptions = JSON.parse(localStorage.getItem('delevery'))|| [{prodId : "default",option:Number(0)}];
 export function addToCart(){
   document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     button.addEventListener('click' , () => {
@@ -18,11 +19,21 @@ export function addToCart(){
       };      
       cart_quan_calculator();
       document.querySelector(`#p${productId}`).value = 1;
-      multiplayer = 1;    
+      multiplayer = 1;
+      let match = 0;
+      deleveryOptions.forEach((item)=>{
+        if(item.prodId === productId){return match = 1};
+      });
+      if(!match){
+        deleveryOptions.push({prodId:`${productId}`,option:1});
+        localStorage.setItem('delevery',JSON.stringify(deleveryOptions));
+      };
     });
     multiplayer_calculator (); 
   });
   cart_quan_calculator();
+
+
 };
 export function multiplayer_calculator(){
   document.querySelectorAll('.quantity_selector').forEach((qbutton) => {
