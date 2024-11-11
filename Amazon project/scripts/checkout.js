@@ -26,7 +26,7 @@ function orderHTMLLoader(){
         else if(deleveryOptions[index].option === 2){delevery_text2 = 'checked';delevery_date=today.add(3,'days').format('dddd, MMMM D');}
         else if (deleveryOptions[index].option === 3){delevery_text3 = 'checked';delevery_date=today.add(1,'days').format('dddd, MMMM D');};
         document.querySelector('.order-summary').innerHTML +=`
-        <div class="cart-item-container">
+        <div class="cart-item-container" id="i${matchingProduct.id}">
           <div class="delivery-date">
             Delivery date: ${delevery_date}
           </div>
@@ -44,11 +44,9 @@ function orderHTMLLoader(){
               </div>
               <div class="product-quantity">
                 <span>
-                  Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                  Quantity: <span id="q${matchingProduct.id}" class="quantity-label">${cartItem.quantity}</span>
                 </span>
-                <span class="update-quantity-link link-primary">
-                  Update
-                </span>
+                <span class="update-quantity-link link-primary" id="u${matchingProduct.id}">Update</span>
                 <span class="link-primary delete-item-js" id="p${matchingProduct.id}" data-product-id="${matchingProduct.id}">
                   Delete
                 </span>
@@ -106,7 +104,8 @@ function orderHTMLLoader(){
     delete_loader();
   document.querySelectorAll('.checkout_number').forEach((num)=>{num.innerHTML = cart.length-1;});
   paymentHTMLLoader(); 
-  delevery_calculator(); 
+  delevery_calculator();
+  update_quantity (); 
 };
 function delete_loader(){
   cart.forEach((item)=>{
@@ -188,4 +187,27 @@ function remove_from_delevery (productId){
   deleveryOptions = newDelevry;
   localStorage.setItem('delevery',JSON.stringify(deleveryOptions));
 };
+function update_quantity () {
+  let updatedQ ;
+  let qupdater ;
+  cart.forEach((item)=>{
+    if(!item.quantity){return}else{
+      document.getElementById(`u${item.productId}`).addEventListener('click',()=>{
+        let qupdaterHTML = `<input id ="s${item.productId}" class = "qupdater" type="number">`;
+        if(document.getElementById(`u${item.productId}`).innerText === 'Update'){
+          document.getElementById(`u${item.productId}`).innerText = 'Save';
+          qupdater = document.getElementById(`q${item.productId}`);
+          qupdater.innerHTML = `${qupdaterHTML}`;
+          updatedQ = document.getElementById(`s${item.productId}`);
+        }else{
+          qupdater.innerHTML = Number(updatedQ.value);
+          document.getElementById(`u${item.productId}`).innerText = 'Update';  
+          item.quantity = Number(updatedQ.value);
+          localStorage.setItem('localCart',JSON.stringify(cart));
+          paymentHTMLLoader();
+        };
+      })
+    };
+  });
+}
 orderHTMLLoader();

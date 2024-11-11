@@ -1,1 +1,1 @@
-export function centsToDollars(amount){return `$${(amount/100).toFixed(2)}`};
+export function centsToDollars(amount){return `$${(Math.round(amount)/100).toFixed(2)}`};
