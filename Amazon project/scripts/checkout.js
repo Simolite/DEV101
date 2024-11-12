@@ -211,3 +211,4 @@ function update_quantity () {
   });
 }
 orderHTMLLoader();
+document.querySelector('.reset_localStorage').addEventListener('click',()=>{localStorage.clear()})
