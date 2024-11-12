@@ -32,8 +32,6 @@ export function addToCart(){
     multiplayer_calculator (); 
   });
   cart_quan_calculator();
-
-
 };
 export function multiplayer_calculator(){
   document.querySelectorAll('.quantity_selector').forEach((qbutton) => {

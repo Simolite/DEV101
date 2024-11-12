@@ -1,3 +1,37 @@
+import { centsToDollars } from "../scripts/utils/money.js";
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+  keywords;
+  htmlcode = '';
+  constructor (productDetails){
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
+  }
+  getStarsUrl(){
+    return `"images/ratings/rating-${this.rating.stars*10}.png"`
+  };
+  getPrice(){
+    return `${centsToDollars(this.priceCents)}`
+  };
+};
+class Clothing extends Product{
+  type;
+  sizeChartLink;
+  htmlcode = '';
+  constructor(productDetails){
+    super(productDetails);
+    this.type = productDetails.type;
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+};
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -657,4 +691,9 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((productDetails)=>{
+  if (productDetails.type === "clothing"){
+    return new Clothing(productDetails);
+  }
+  return new Product(productDetails);
+});

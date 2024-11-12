@@ -17,14 +17,14 @@ function HTMLLoader(){
 
         <div class="product-rating-container">
           <img class="product-rating-stars"
-            src="images/ratings/rating-${(product.rating.stars*10)}.png">
+            src=${product.getStarsUrl()}>
           <div class="product-rating-count link-primary">
           ${product.rating.count}
           </div>
         </div>
 
         <div class="product-price">
-          ${centsToDollars(product.priceCents)}
+        ${product.getPrice()}
         </div>
         <div class="product-quantity-container">
           <select class="quantity_selector" id="p${product.id}" data-productq-id="${product.id}">
@@ -40,7 +40,7 @@ function HTMLLoader(){
             <option value="10">10</option>
           </select>
         </div>
-
+        
         <div class="product-spacer"></div>
 
         <div class="added-to-cart">
