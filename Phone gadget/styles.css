@@ -155,8 +155,10 @@ footer {
     color: white;
     display: flex;
     justify-content: center;
-    height:10vh;
     align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 30vh;
 }
 
 .Products h2 {
@@ -300,6 +302,55 @@ form,form div {
     margin: 20px;
     color: #b30000;
 }
+
+.fcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    
+}
+.fmain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40vw;
+    max-width: 450px;
+    margin-right: 5vw;
+}
+
+.fmain p {
+    margin: 10px;
+    text-align: start;
+}
+
+.fmain h3,.fcategories h3 {
+    font-size: larger;
+    color: #000000;
+}
+
+.fcategories {
+    display: flex;
+    flex-direction: column;
+}
+
+.fcategories h3 {
+    padding-bottom: 1vh;
+}
+
+.fcategories ul li {
+    list-style: none;
+    margin: 1vh 0;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.fcategories ul li:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
 @media (max-width:1100px) {
     #Brands ul li {
         width: 20%;
