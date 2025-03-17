@@ -1,0 +1,331 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+body{
+    background-color: #ffe8e8;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3vw;
+    height: 7vh;
+    background: #b30000;
+}
+
+header h1 ,header nav ul li a{
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+header ul{
+    display: flex;
+    list-style: none;
+    width: 40vw;
+    justify-content: space-around;
+}
+
+.Hero {   
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    color: #b30000;
+}
+
+.Hero H2 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.Product {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    margin: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.Product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.Product p {
+    margin: 15px;
+}
+
+button {
+    border: none;
+    background-color: #b30000;
+    padding: 10px 20px;
+    border-radius: 9px;
+    color: white;
+}
+
+button:hover {
+    background-color: #ff1a1a;
+}
+
+.Product:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.4);
+    transition: 0.3s;
+}
+
+#Services H2 {
+    margin: 30px 10px;
+}
+
+#Services ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+#Services ul li {
+    margin: 5px;
+    padding:  15px;
+    background-color: #ffcccc;
+    border-left: 5px solid #b30000;
+    text-align: start;
+}
+
+#About h2 {
+    margin: 30px 10px;
+}
+
+#About p {
+    margin: 10px;
+}
+
+#Contact h2 {
+    margin: 30px 10px;
+}
+
+#Contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#Contact form {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+}
+
+#Contact form div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Contact form input, #Contact form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#Contact form button {
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #b30000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height:10vh;
+    align-items: center;
+}
+
+.Products h2 {
+    padding-bottom: 10px;
+}
+
+.slider-warapper {
+    position: relative;
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.slider {
+    display: flex;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+    width: 60%;
+    border-radius: 0.25rem;
+}
+
+.slider-wrapper {
+display: flex;
+transition: transform 1s ease;
+width: 300%;
+position: relative;
+}
+
+.slider img {
+width: 100%;
+object-fit: cover;
+}  
+
+.slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slider img {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.slider-nav {
+    display: flex;
+    column-gap: 1rem;
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+}
+
+.slider-nav a {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.75;
+    transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover {
+    opacity: 1;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.slider:hover {
+    animation-play-state: paused ;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+form,form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.vab {
+    margin: 20px 0px;
+}
+
+.cath2 {
+    margin: 20px 0px;
+}
+
+#Brands ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#Brands ul li {
+    margin: 10px;
+    list-style: none;
+    width: 8%;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+#Brands ul li img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+#Brands ul li:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    cursor: pointer;
+}
+#Social ul {
+    display: flex;
+    justify-content: center;
+}
+
+#Social ul li{
+    list-style: none;
+    margin: 20px;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+#Social ul li:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    cursor: pointer;   
+}
+
+#Social p {
+    margin: 20px;
+    color: #b30000;
+}
+@media (max-width:1100px) {
+    #Brands ul li {
+        width: 20%;
+    }
+}
+
+@media (max-width: 768px) {
+    .slider {
+        width: 90%;
+    }
+    header {
+        justify-content: center;
+    }
+    header nav {
+        display: none;
+    }
+    .Product {
+        width: 50%;
+        margin: 10px 0;
+    }
+    .Products {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    form div {
+        flex-direction: column;
+    }
+}

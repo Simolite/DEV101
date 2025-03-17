@@ -5,7 +5,7 @@ if playing.lower() != "yes":
 print("okay")
 score = 0
 answer = input("what year is it ? ")
-if answer.lower() == '2024' :
+if answer.lower() == '2025' :
     print("correct")
     score += 1
 else :
