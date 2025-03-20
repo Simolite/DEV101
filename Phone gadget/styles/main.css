@@ -1,46 +1,8 @@
-*{
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    font-family: Roboto, Arial;
-}
-
-body{
-    background-color: #ffe8e8;
-}
-
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3vw;
-    height: 7vh;
-    background: #b30000;
-}
-
-header h1 a ,header nav ul li a{
-    color: #ffffff;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-header ul{
-    display: flex;
-    list-style: none;
-    width: 40vw;
-    justify-content: space-around;
-}
-
 .Hero {   
     height: 9vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-h2 {
-    color: #b30000;
 }
 
 .Hero H2 {
@@ -69,18 +31,6 @@ h2 {
 
 .Product p {
     margin: 15px;
-}
-
-button {
-    border: none;
-    background-color: #b30000;
-    padding: 10px 20px;
-    border-radius: 9px;
-    color: white;
-}
-
-button:hover {
-    background-color: #ff1a1a;
 }
 
 .Product:hover{
@@ -149,17 +99,6 @@ button:hover {
 
 #Contact form button {
     margin-top: 20px;
-}
-
-footer {
-    background-color: #b30000;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 30vh;
 }
 
 .Products h2 {
@@ -280,77 +219,6 @@ form,form div {
     transition: 0.3s;
     cursor: pointer;
 }
-#Social ul {
-    display: flex;
-    justify-content: center;
-}
-
-#Social ul li{
-    list-style: none;
-    margin: 20px;
-    transform: scale(1);
-    transition: 0.3s;
-}
-
-#Social ul li:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    cursor: pointer;   
-}
-
-#Social p {
-    margin: 20px;
-    color: #b30000;
-}
-
-.fcontainer {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    
-}
-.fmain {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 40vw;
-    max-width: 450px;
-    margin-right: 5vw;
-}
-
-.fmain p {
-    margin: 10px;
-    text-align: start;
-}
-
-.fmain h3,.fcategories h3 {
-    font-size: larger;
-    color: #000000;
-}
-
-.fcategories {
-    display: flex;
-    flex-direction: column;
-}
-
-.fcategories h3 {
-    padding-bottom: 1vh;
-}
-
-.fcategories ul li {
-    list-style: none;
-    margin: 1vh 0;
-    transform: scale(1);
-    transition: 0.3s;
-}
-
-.fcategories ul li:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: 0.3s;
-}
 
 @media (max-width:1100px) {
     #Brands ul li {
@@ -362,12 +230,7 @@ form,form div {
     .slider {
         width: 90%;
     }
-    header {
-        justify-content: center;
-    }
-    header nav {
-        display: none;
-    }
+
     .Product {
         width: 50%;
         margin: 10px 0;
@@ -380,7 +243,5 @@ form,form div {
     form div {
         flex-direction: column;
     }
-    footer{
-        height: 50vh;
-    }
+
 }
