@@ -10,3 +10,16 @@ function moveSlider() {
 }
 
 setInterval(moveSlider, 3000);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const body = document.body;
+
+    navToggle.addEventListener('change', function() {
+        if (navToggle.checked) {
+            body.classList.add('no-scroll');
+        } else {
+            body.classList.remove('no-scroll');
+        }
+    });
+});
