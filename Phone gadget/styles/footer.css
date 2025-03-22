@@ -1,0 +1,67 @@
+footer {
+    background-color: #b30000;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 30vh;
+    flex-shrink: 0;
+}
+
+.fcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.fmain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40vw;
+    max-width: 450px;
+    margin-right: 5vw;
+}
+
+.fmain p {
+    margin: 10px;
+    text-align: start;
+}
+
+.fmain h3, .fcategories h3 {
+    font-size: larger;
+    color: #000000;
+}
+
+.fcategories {
+    display: flex;
+    flex-direction: column;
+}
+
+.fcategories h3 {
+    padding-bottom: 1vh;
+}
+
+.fcategories ul li {
+    list-style: none;
+    margin: 1vh 0;
+    transform: scale(1);
+    transition: 0.3s;
+}
+
+.fcategories ul li:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+
+    footer {
+        height: 50vh;
+    }
+}
