@@ -59,6 +59,11 @@ footer {
     transition: 0.3s;
 }
 
+.fcategories ul li a {
+    color: white;
+    text-decoration: none;
+
+}
 @media (max-width: 768px) {
 
     footer {
