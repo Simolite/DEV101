@@ -1,8 +1,32 @@
-h4 {
-    padding: 1vw;
-    color: #b30000;
+.Product {
+    display: inline-block;
+    height: 40vh;
+    text-align: center;
+    padding: 0.5vw;
+    margin: 1vw;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+    transition: 0.3s;
 }
 
-.Product:hover {
+.Product img {
+    height: 60%;
+    width: auto;
+}
+
+.Product p {
+    padding: 2vh;
+}
+
+h2{
+margin: 4vh;
+}
+
+.Product:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.4);
+    transition: 0.3s;
     cursor: pointer;
 }
