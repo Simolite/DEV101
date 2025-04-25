@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.calculator {
+    position: absolute;
+    background-color: #2d2d2d67;
+    border-radius: 10px;
+    width: 25vw;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.display {
+    background-color: #1d1d1d;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: right;
+}
+
+#display {
+    background-color: #1d1d1d;
+    color: white;
+    border: none;
+    width: 100%;
+    font-size: 2em;
+    text-align: right;
+    outline: none;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #3e3e3e;
+    color: white;
+    font-size: 1.5em;
+    padding: 1vw;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.button:hover {
+    background-color: #575757;
+}
+
+.operator {
+    background-color: #ff9500;
+
+}
+
+.operator:hover {
+    background-color: #f37d00;
+}
+
+
+.memory{
+    background-color: #e02e2e;
+}
+
+.memory:hover {
+    background-color: #aa2626;
+}
+
+.hover {
+    text-align: center;
+    background-color: #3a663a;
+    font-size: 0.7em;
+    padding: 10px;
+}
+
+body {
+    background-color: black;
+}
+
+@media (max-width:1500px) {
+    .calculator {
+        width: 35vw;
+    }
+    .button {
+        width: 7vw;
+        padding: 1.5vw;
+    }
+    
+}
+
+@media (max-width:1000px) {
+    .calculator {
+        width: 60vw;
+    }
+    .button {
+        width: 12vw;
+        height: 8vh;
+        padding: 1vw;
+
+    }
+    
+}
+
+@media (max-width:700px) {
+    .calculator {
+        width: 90vw;
+    }
+    .button {
+        width: 18vw;
+        height: 8vh;
+        padding: 0.2vw;
+    }
+    
+}
+
+@media (max-width:400px) {
+    .calculator {
+        width: 100vw;
+    }
+    .button {
+        width: 18vw;
+        height: 5vh;
+        padding: 0.2vw;
+    }
+    
+}
+
+#particles-js{
+    height: 100vh;
+}
+
+#info {
+    height: auto;
+    width: 30vw;
+    background-color: rgba(133, 133, 133, 0.493);
+    position: fixed;
+    top: 15vh;
+    left:3vw;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(209, 209, 209);
+}
+
+
+.info,#info p {
+    width: 15vw;
+    margin: 1vh 0px;
+}

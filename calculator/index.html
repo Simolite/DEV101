@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="display" disabled>
+        </div>
+
+        <div class="buttons">
+
+            <button id="oclear" class="button operator" onclick="clearDisplay()">C</button>
+            <button id="omod" class="button operator" onclick="appendToDisplay('%')"><i class="fa-duotone fa-light fa-percent"></i></button>
+            <button id="oabs" class="button operator" onclick="abs()">±</button>
+            <button id="odell" class="button operator" onclick="dell()"><i class="fas fa-backspace"></i></i></button>
+
+            <button id="oflip" class="button operator" onclick="flip()">1/x</button>
+            <button id="opo2" class="button operator" onclick="power_of_2()">x²</button>
+            <button id="osr" class="button operator" onclick="squar_root()"><i class="fa-solid fa-square-root-variable"></i></i></button>
+            <button class="button operator" onclick="appendToDisplay('/')"><i class="fas fa-divide"></i></button>
+
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button operator" onclick="appendToDisplay('*')"><i class="fas fa-times"></i></button>
+
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button operator" onclick="appendToDisplay('-')"><i class="fas fa-minus"></i></button>
+
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button operator" onclick="appendToDisplay('+')"><i class="fas fa-plus"></i></button>
+
+            <button id="mm" class="button memory" onclick="mm()">M-</button>
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="button" onclick="appendToDisplay('.')">.</button>
+            <button class="button operator" onclick="calculate()"><i class="fas fa-equals"></i></button>
+
+            <button id="mp" class="button memory" onclick="mp()">M+</button>
+            <button id="mr" class="button memory" onclick="mr()">MR</button>
+            <button id="ms" class="button memory" onclick="ms()">MS</button>
+            <button id="mc" class="button memory mlist" onclick="mc()">MC</i></button>
+
+        </div>
+
+    </div>
+    <div id="cont"></div>
+
+    <script src="script.js"></script>
+    <script src="particles.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
