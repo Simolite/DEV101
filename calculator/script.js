@@ -127,7 +127,7 @@ function dsa(){
 }
 
 if(localStorage.getItem("info") !== "true"){
-    document.getElementById('cont').innerHTML = `<div id="info"><p>Hello! <br><br>To start using the calculator just click on the buttons using the mouse . <br> You can also use the keyboard to enter numbers and operations. <br> For example, you can type "1+2" and press Enter to calculate the result. <br> You can also use the following keyboard shortcuts: <br> <b>Backspace</b> to delete the last character, <b>Enter</b> or <b>=</b> to calculate the result, and <b>Escape</b> or <b>C</b> to clear the display. <br><br> Enjoy!<br><br></p><button class="button info" onclick="closeInfo()">Close</button><button class="button info" onclick="dsa()">Don't show again</button></div>`;
+    document.getElementById('cont').innerHTML = `<div id="info"><p>Hello! <br><br>To start using the calculator just click on the buttons using the mouse , press on the screen to copy  . <br> You can also use the keyboard to enter numbers and operations. <br> For example, you can type "1+2" and press Enter to calculate the result. <br> You can also use the following keyboard shortcuts: <br> <b>Backspace</b> to delete the last character, <b>Enter</b> or <b>=</b> to calculate the result, and <b>Escape</b> or <b>C</b> to clear the display. <br><br> Enjoy!<br><br></p><button class="button info" onclick="closeInfo()">Close</button><button class="button info" onclick="dsa()">Don't show again</button></div>`;
 }
 
 M = 0;
