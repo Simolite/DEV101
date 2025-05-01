@@ -39,6 +39,7 @@ body {
     font-size: 2em;
     text-align: right;
     outline: none;
+    cursor: pointer;
 }
 
 .buttons {
@@ -97,53 +98,7 @@ body {
     background-color: black;
 }
 
-@media (max-width:1500px) {
-    .calculator {
-        width: 35vw;
-    }
-    .button {
-        width: 7vw;
-        padding: 1.5vw;
-    }
-    
-}
 
-@media (max-width:1000px) {
-    .calculator {
-        width: 60vw;
-    }
-    .button {
-        width: 12vw;
-        height: 8vh;
-        padding: 1vw;
-
-    }
-    
-}
-
-@media (max-width:700px) {
-    .calculator {
-        width: 90vw;
-    }
-    .button {
-        width: 18vw;
-        height: 8vh;
-        padding: 0.2vw;
-    }
-    
-}
-
-@media (max-width:400px) {
-    .calculator {
-        width: 100vw;
-    }
-    .button {
-        width: 18vw;
-        height: 5vh;
-        padding: 0.2vw;
-    }
-    
-}
 
 #particles-js{
     height: 100vh;
@@ -152,7 +107,7 @@ body {
 #info {
     height: auto;
     width: 30vw;
-    background-color: rgba(133, 133, 133, 0.493);
+    background-color: rgba(133, 133, 133, 0.5);
     position: fixed;
     top: 15vh;
     left:3vw;
@@ -171,3 +126,96 @@ body {
     width: 15vw;
     margin: 1vh 0px;
 }
+
+
+@media (max-width:1500px) {
+    .calculator {
+        width: 35vw;
+    }
+    .button {
+        width: 7vw;
+        padding: 1.5vw;
+    }
+    #info {
+        width: 30vw;
+        left:1vw;
+    }
+    .info,#info p {
+        width: 25vw;
+        margin: 1vh 0px;
+    }
+    
+}
+
+@media (max-width:1000px) {
+    .calculator {
+        width: 60vw;
+    }
+    .button {
+        width: 12vw;
+        height: 8vh;
+        padding: 1vw;
+
+    }
+    #info {
+        height: auto;
+        width: 90vw;
+        top: 20vh;
+        left: 5vw;
+    background-color: rgba(133, 133, 133, 0.9);
+
+    }
+    .info,#info p {
+        width: 90%;
+        margin: 1vh 0px;
+    }
+    
+}
+
+@media (max-width:700px) {
+    .calculator {
+        width: 90vw;
+    }
+    .button {
+        width: 18vw;
+        height: 8vh;
+        padding: 0.2vw;
+    }
+    #info {
+        height: auto;
+        width: 90vw;
+        top: 20vh;
+        left: 5vw;
+    background-color: rgba(133, 133, 133, 0.9);
+
+    }
+    .info,#info p {
+        width: 90%;
+        margin: 1vh 0px;
+    }
+}
+
+@media (max-width:400px) {
+    .calculator {
+        width: 100vw;
+    }
+    .button {
+        width: 18vw;
+        height: 5vh;
+        padding: 0.2vw;
+    }
+    #info {
+        height: auto;
+        width: 90vw;
+        top: 20vh;
+        left: 5vw;
+    background-color: rgba(133, 133, 133, 0.9);
+
+    }
+    .info,#info p {
+        width: 90%;
+        margin: 1vh 0px;
+    }
+}
+
+  

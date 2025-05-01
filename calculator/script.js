@@ -137,4 +137,17 @@ document.addEventListener('keydown', function(event) {
     eventl(event.key);
 });
 
+function copyToClipboard() {
+    let Text = document.getElementById("display");
+    let copyText = document.getElementById("display").value;
+    Text.select();
+    Text.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(Text.value);
+    document.getElementById("display").value = "Copied!";
+    setTimeout(() => {document.getElementById('display').value = copyText}, 1000);
+}
+
+
+
+
 // localStorage.setItem('info', 'false'); //un comment this line to show the info again do not forget to recomment again :)
