@@ -8,7 +8,7 @@
       }
     },
     "color": {
-      "value": "#ffffff"
+      "value": "#000000"
     },
     "shape": {
       "type": "circle",
@@ -114,3 +114,4 @@
     "background_size": "cover"
   }
 }
+// how do I change the color of the particles in particles.js?
