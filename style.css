@@ -18,6 +18,7 @@ body {
     position: fixed;
     z-index: 0;
     width: 100vw;
+    height: 100vh;
 }
 
 header {
@@ -51,6 +52,16 @@ span ul {
 
 H1 {
     color: white;
+}
+
+a h2 {
+    color: white;
+    margin: 0.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vw;
+    font-weight: 500;
 }
 
 #toggle {
@@ -110,6 +121,8 @@ main button a {
 .hero {
     z-index : 1;
 }
+
+
 #contactMe {
     background-color: rgba(95, 95, 95, 0.7);
     border-style: none;
@@ -121,3 +134,4 @@ main button a {
     justify-content: center;
 }
 
+/* jeux de friv I dont know whst is happning now  */
