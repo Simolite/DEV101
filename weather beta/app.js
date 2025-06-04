@@ -31,13 +31,12 @@ citys.forEach(element => {
 });
 
 async function getweather(city, unit) {
-    screen.value = "Fetching weather...";
+    document.querySelector('.card').style.display = 'block';
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=${unit}`;
     try {
         const response = await fetch(url);
         const data = await response.json();
         if (!data.main) {
-            screen.value = "City not found.";
             return false;
         }
 
@@ -57,17 +56,11 @@ async function getweather(city, unit) {
         document.getElementById('clouds').innerText = `Cloudiness: ${data.clouds.all}%`;
         document.getElementById('sunrise').innerText = `Sunrise: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString()}`;
         document.getElementById('sunset').innerText = `Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString()}`;
-
-        screen.style.backgroundColor = 'grey';
-        setTimeout(() => {
-            screen.style.backgroundColor = '#ccc';
-        }, 3000);
-
+        document.querySelector('select').value = city;
         return true;
 
     } catch (error) {
         console.error(error);
-        screen.value = "Error fetching data.";
         return false;
     }
 }
