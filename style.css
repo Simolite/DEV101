@@ -3,6 +3,7 @@
     margin: 0;
     box-sizing: border-box;
     color: white;
+    
 }
 
 body {
@@ -12,6 +13,7 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    font-size: 1.5rem;
 }
 
 #particles-js {
@@ -34,6 +36,9 @@ header {
 
 header span {
     margin: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 span ul li a {
     display: flex;
@@ -46,7 +51,6 @@ span ul li a {
 span ul {
     list-style: none;
     display: flex;
-    width: 16vw;
     align-items: center;
 }
 
@@ -60,7 +64,6 @@ a h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1vw;
     font-weight: 500;
 }
 
@@ -109,7 +112,7 @@ main button {
 main button:hover {
     background-color: rgba(95, 95, 95, 0.9);
     scale: 1.1;
-    box-shadow: #ffffff 0px 0px 10px;
+    box-shadow: #ffffff 0 0 1vw;
     transition: 0.3s;
 }
 
@@ -134,4 +137,8 @@ main button a {
     justify-content: center;
 }
 
-/* jeux de friv I dont know whst is happning now  */
+@media (max-width: 1024px) {
+    a h2 {
+
+    }
+}
