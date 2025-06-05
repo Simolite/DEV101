@@ -20,17 +20,9 @@ function loadCitiesFromStorage() {
     }
 }
 
-loadCitiesFromStorage();
-
-let select = document.querySelector('select');
-citys.forEach(element => {
-    let option = document.createElement('option');
-    option.value = element;
-    option.innerText = element;
-    select.appendChild(option);
-});
-
-async function getweather(city, unit) {
+async function getweather() {
+    city = document.querySelector('select').value;
+    unit = document.querySelector('input[name="unit"]:checked').value;
     screen.value = "Fetching weather...";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=${unit}`;
     try {
@@ -43,7 +35,7 @@ async function getweather(city, unit) {
 
         symbol = unit !== 'metric' ? 'F' : 'C';
         const flagURL = `https://flagsapi.com/${data.sys.country}/flat/64.png`;
-
+        document.querySelector('.card').style.display = 'block';
         document.getElementById('flag').src = flagURL;
         document.getElementById('city-name').innerText = `${data.name}, ${data.sys.country}`;
         document.getElementById('description').innerText = `Weather: ${data.weather[0].description}`;
@@ -72,7 +64,13 @@ async function getweather(city, unit) {
     }
 }
 
-async function addcity(city) {
+async function addcity() {
+    let city = document.getElementById('add').value.trim();
+    let exists = citys.some(c => c.toLowerCase() === city.toLowerCase());
+    if (exists) {
+        alert('City already exists');
+        return;
+    }
     const valid = await getweather(city, unit);
     if (valid) {
         let list = document.querySelector('select');
@@ -85,23 +83,21 @@ async function addcity(city) {
     } else {
         alert('Invalid city');
     }
+    document.getElementById('add').value = '';
 }
 
 get.addEventListener('click', () => {
-    city = document.querySelector('select').value;
-    unit = document.querySelector('input[name="unit"]:checked').value;
-    getweather(city, unit);
+    getweather();
 });
-
 add.addEventListener('click', () => {
-    let city = document.getElementById('add').value.trim();
-    let exists = citys.some(c => c.toLowerCase() === city.toLowerCase());
-    if (!exists) {
-        addcity(city);
-    } else {
-        alert('City already exists');
-    }
-    document.getElementById('add').value = '';
+    addcity();
 });
-
+loadCitiesFromStorage();
+let select = document.querySelector('select');
+citys.forEach(element => {
+    let option = document.createElement('option');
+    option.value = element;
+    option.innerText = element;
+    select.appendChild(option);
+});
 document.querySelector('.card').style.display = 'none';

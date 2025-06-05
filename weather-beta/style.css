@@ -3,10 +3,13 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 body {  
     display: flex;
     justify-content: center;
+	padding-top: 10vh;
 }
+
 .container {
     display: flex;
     justify-content: center;
@@ -15,12 +18,8 @@ body {
     width: 80vw;
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-input {
-    width: 100%;
+input[type="text"] {
+    width: 40vw;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -45,15 +44,13 @@ label {
 }
 
 select {
-    width: 100%;
+    width: 40vw;
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #ccc;
 }
-
-
 
 .weather-card {
   background-color: #f0f0f0;
@@ -74,7 +71,6 @@ select {
   margin: 5px 0;
 }
 
-
 .card {
   padding: 16px;
   border-radius: 10px;
@@ -82,11 +78,12 @@ select {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   max-width: 300px;
 }
+
 .card img {
   width: 64px;
   margin-bottom: 10px;
 }
+
 .card p {
   margin: 4px 0;
 }
-
