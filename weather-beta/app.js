@@ -1,10 +1,9 @@
 const get = document.querySelector('button');
 const add = document.querySelector('.addbtn');
+const dell = document.querySelector('.clearbtn');
 const key = 'a26c24e25487ba0faaf1d58d595bda69';
 let citys = [];
 const card = document.getElementById('weatherCard');
-let city = 'paris';
-let unit = 'metric';
 let symbol = 'C';
 
 function saveCitiesToStorage() {
@@ -20,10 +19,9 @@ function loadCitiesFromStorage() {
     }
 }
 
-async function getweather() {
-    city = document.querySelector('select').value;
-    unit = document.querySelector('input[name="unit"]:checked').value;
+async function getweather(city) {
     screen.value = "Fetching weather...";
+    let unit = document.querySelector('input[name="unit"]:checked').value;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${key}&units=${unit}`;
     try {
         const response = await fetch(url);
@@ -34,6 +32,8 @@ async function getweather() {
 
         symbol = unit !== 'metric' ? 'F' : 'C';
         const flagURL = `https://flagsapi.com/${data.sys.country}/flat/64.png`;
+        const icon = data.weather[0].icon;
+        const iconURL = `https://openweathermap.org/img/wn/${icon}@2x.png`;
         document.querySelector('.card').style.display = 'block';
         document.getElementById('flag').src = flagURL;
         document.getElementById('city-name').innerText = `${data.name}, ${data.sys.country}`;
@@ -49,6 +49,7 @@ async function getweather() {
         document.getElementById('sunrise').innerText = `Sunrise: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString()}`;
         document.getElementById('sunset').innerText = `Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString()}`;
         document.querySelector('select').value = city;
+        document.getElementById('weather-icon').src = iconURL;       
         return true;
 
     } catch (error) {
@@ -57,40 +58,46 @@ async function getweather() {
     }
 }
 
-async function addcity() {
-    let city = document.getElementById('add').value.trim();
+async function addcity(city) {
+    if (!document.getElementById('add').value){alert('please enter the city name you want to add ');return}
     let exists = citys.some(c => c.toLowerCase() === city.toLowerCase());
     if (exists) {
         alert('City already exists');
         return;
     }
-    const valid = await getweather(city, unit);
+    const valid = await getweather(city);
     if (valid) {
-        let list = document.querySelector('select');
-        let option = document.createElement('option');
-        option.value = city;
-        option.innerText = city;
-        list.appendChild(option);
         citys.push(city);
         saveCitiesToStorage();
+        loader();
+        document.querySelector('select').value = city;
     } else {
         alert('Invalid city');
     }
     document.getElementById('add').value = '';
 }
-
+function loader(){
+    loadCitiesFromStorage();
+    let select = document.querySelector('select');
+    select.innerHTML='';
+    citys.forEach(element => {
+        let option = document.createElement('option');
+        option.value = element;
+        option.innerText = element;
+        select.appendChild(option);
+    });
+    document.querySelector('.card').style.display = 'none';
+}
 get.addEventListener('click', () => {
-    getweather();
+    let city = document.querySelector('select').value;
+    getweather(city);
 });
 add.addEventListener('click', () => {
-    addcity();
+    let city = document.getElementById('add').value.trim();
+    addcity(city);
 });
-loadCitiesFromStorage();
-let select = document.querySelector('select');
-citys.forEach(element => {
-    let option = document.createElement('option');
-    option.value = element;
-    option.innerText = element;
-    select.appendChild(option);
+dell.addEventListener('click',() => {
+    localStorage.removeItem('customCities');
+    loader();
 });
-document.querySelector('.card').style.display = 'none';
+loader();

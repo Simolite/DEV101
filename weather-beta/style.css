@@ -80,10 +80,18 @@ select {
 }
 
 .card img {
-  width: 64px;
-  margin-bottom: 10px;
+	width: 64px;
+	margin: 10px 10px;
+	height: auto;
+	border-radius: 5px;
+
 }
 
 .card p {
   margin: 4px 0;
+}
+
+#weather-icon {
+	background: #5c98ff;
+	padding: -10px;
 }

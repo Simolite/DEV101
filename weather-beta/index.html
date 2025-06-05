@@ -10,7 +10,7 @@
     <div class="container">
         <H1>Simple weather</H1>
         <div class="card">
-            <img src="" alt="flag" id="flag" />
+            <img src="" alt="flag" id="flag" /><img id="weather-icon"/>
             <h2 id="city-name"></h2>
             <p id="description"></p>
             <p id="temp"></p>
@@ -22,7 +22,7 @@
             <p id="visibility"></p>
             <p id="clouds"></p>
             <p id="sunrise"></p>
-            <p id="sunset"></p>
+            <p id="sunset"></p> 
         </div>
         <button>get weather</button>
         <label for="city">Choose a city:</label>
@@ -34,7 +34,9 @@
         <label for="add">Add a city to the list</label>
         <input type="text" id="add" placeholder="city name">
         <button class="addbtn">Add a city to the list</button>
-    </div> 
+        <button class="clearbtn">Clear all user cities</button>
+    </div>
+    
     <script src="app.js"></script>
 </body>
 </html>
