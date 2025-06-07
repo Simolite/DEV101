@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movie Search</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🎬 Movie Search App</h1>
+    <input type="text" id="movie-input" placeholder="Enter a movie title..." />
+    <button id="search-btn">Search</button>
+
+    <div class="result-card" id="movie-card" style="display: none;">
+      <img id="poster" alt="Movie Poster" />
+      <div class="info">
+        <h2 id="title"></h2>
+        <p><strong>Year:</strong> <span id="year"></span></p>
+        <p><strong>Genre:</strong> <span id="genre"></span></p>
+        <p><strong>Director:</strong> <span id="director"></span></p>
+        <p><strong>Rating:</strong> <span id="rating"></span></p>
+        <p><strong>Plot:</strong> <span id="plot"></span></p>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
