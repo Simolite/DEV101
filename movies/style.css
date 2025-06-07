@@ -30,6 +30,7 @@ button {
   border-radius: 5px;
   margin-left: 10px;
   cursor: pointer;
+  margin: 5px;
 }
 
 button:hover {
@@ -42,13 +43,15 @@ button:hover {
   padding: 20px;
   border-radius: 10px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   gap: 20px;
 }
 
 .result-card img {
   max-width: 150px;
   border-radius: 5px;
+  justify-self: center;
 }
 
 .info {

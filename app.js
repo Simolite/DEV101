@@ -94,7 +94,7 @@ function updateHoverStyle(color) {
   const styleTag = document.getElementById('dynamic-hover-style') || document.createElement('style');
   styleTag.id = 'dynamic-hover-style';
   styleTag.innerHTML = `
-    main button:hover,span button:hover {
+    button:hover {
       box-shadow: 0 0 1vw ${color};
     }
   `;
@@ -111,15 +111,16 @@ class Project {
   }
 }
 let dn = "https://arrachmohammed.dev/"
+dn='';
 let projects = [];
 let calculator = new Project("Calculator",dn+"calculator");
-let amazon = new Project("Amazon Clone",dn+"Amazon%20project/amazon.html");
+let amazon = new Project("Amazon",dn+"Amazon%20project/amazon.html");
 let joke = new Project("Random Joke",dn+"joke");
-let movies = new Project("Movie info getter",dn+"movies");
+let movies = new Project("Movie info",dn+"movies");
 let PG = new Project("Phone Gadjet",dn+"Phone%20gadget");
-let rps = new Project("rps",dn+"RPS%20project");
-let weatherBeta = new Project("Weather",dn+"weather-beta");
-let youtube = new Project("Youtube Clone",dn+"youtube%20project");
+let rps = new Project("RPS",dn+"RPS%20project");
+let weatherBeta = new Project("Weather app",dn+"weather-beta");
+let youtube = new Project("Youtube",dn+"youtube%20project");
 projects.push(calculator,amazon,joke,movies,PG,rps,weatherBeta,youtube);
 projects.forEach((element)=>{
   let main = document.querySelector('main');

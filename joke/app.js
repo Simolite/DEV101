@@ -1,4 +1,4 @@
-let screen = document.querySelector('input');
+let screen = document.querySelector('.screen p');
 const btn = document.querySelector('button');
 const url = 'https://icanhazdadjoke.com/';
 btn.addEventListener('click',getjoke);
@@ -12,9 +12,9 @@ async function getjoke() {
         });
 
         const data = await response.json();
-        screen.value = data.joke;
+        screen.innerText = data.joke;
       } catch (error) {
-        screen.value = 'Failed to load joke. Try again.';
+        screen.innerText = 'Failed to load joke. Try again.';
         console.error(error);
       }
 }
