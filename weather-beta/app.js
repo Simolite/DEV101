@@ -1,6 +1,7 @@
 const get = document.querySelector('button');
 const add = document.querySelector('.addbtn');
-const dell = document.querySelector('.clearbtn');
+const clear = document.querySelector('.clearbtn');
+const dell = document.querySelector('.delbtn');
 const key = 'a26c24e25487ba0faaf1d58d595bda69';
 let citys = [];
 const card = document.getElementById('weatherCard');
@@ -62,7 +63,9 @@ async function addcity(city) {
     if (!document.getElementById('add').value){alert('please enter the city name you want to add ');return}
     let exists = citys.some(c => c.toLowerCase() === city.toLowerCase());
     if (exists) {
-        alert('City already exists');
+        let answer = prompt('The city already exists. If you are trying to delete it, type anything and press OK, Otherwise, press Cancel."');
+        if(!answer){document.getElementById('add').value = '';return}
+        dellcity(city);
         return;
     }
     const valid = await getweather(city);
@@ -71,6 +74,7 @@ async function addcity(city) {
         saveCitiesToStorage();
         loader();
         document.querySelector('select').value = city;
+        document.querySelector('.card').style.display = 'block';
     } else {
         alert('Invalid city');
     }
@@ -88,6 +92,23 @@ function loader(){
     });
     document.querySelector('.card').style.display = 'none';
 }
+
+function dellcity(city){
+    if(!city){
+        alert('please enter a city name !');
+        return;
+    }
+    const initialLength = citys.length;
+    citys = citys.filter(c => c.toLowerCase()!=city.toLowerCase());
+    saveCitiesToStorage();
+    loader();
+    if(initialLength==citys.length){
+        let answer = prompt("The city you want to delete was not found in the list. If you are trying to add it instead, type anything and press OK. Otherwise, press Cancel.");
+        if(!answer){document.getElementById('add').value = '';return}
+        addcity(city);
+    }else{alert('The city '+city+' deleted with succes')};
+    document.getElementById('add').value = '';
+}
 get.addEventListener('click', () => {
     let city = document.querySelector('select').value;
     getweather(city);
@@ -96,8 +117,12 @@ add.addEventListener('click', () => {
     let city = document.getElementById('add').value.trim();
     addcity(city);
 });
-dell.addEventListener('click',() => {
+clear.addEventListener('click',() => {
     localStorage.removeItem('customCities');
     loader();
+});
+dell.addEventListener('click',() => {
+    let city = document.getElementById('add').value.trim();
+    dellcity(city);
 });
 loader();
