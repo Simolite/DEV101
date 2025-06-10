@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    gap: 2vw;
+    margin: 0.2vw;
+}
+td img {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+td,th {
+    border: solid 1px black;
+}
+
+table {
+    border: solid 1px black;
+    height: 10vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+}
+
+input:not(input[type="file"]),input[type="file"]::file-selector-button{
+    border-radius: 2px;
+    border: 1px solid #707070;
+    padding: 2px 5px;
+}
+
+input {
+    margin-bottom: 1vw;
+}
+
+.selected {
+    background: #ccf;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFMR_2022_2023</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="stagiaire">
+        <h3>Informations du stagiaire</h3>
+        <form>
+            <div>
+                <label for="num">*Numero d'inscreption:</label>
+                <input type="text" id="num" placeholder="Stg1234">
+            </div>
+            <div>
+                <label for="nom">*Nom complet:</label>
+                <input type="text" id="nom" placeholder="abdemoujib Seghir">
+            </div>
+            <div>
+                <label for="tele">Telephone:</label>
+                <input type="number" id="tele" placeholder="0623452167">
+            </div>
+            <div>
+                <label for="filiere"> filiere:</label>
+                <select name="filiere" id="filiere">
+                    <option value="1">filiere1</option>
+                    <option value="2">filiere2</option>
+                    <option selected value="Dev">DEV</option>
+                </select>
+            </div>
+        </form>
+    </section>
+    <section id="module">
+        <h3>Informations des modules</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sigle de module</th>
+                    <th>Libelle</th>
+                    <th>Coefficient</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>M102</td>
+                    <td>Algo</td>
+                    <td>2</td>
+                    <td><input id="m102" type="number"></td>
+                </tr>
+                <tr>
+                    <td>M103</td>
+                    <td>POO</td>
+                    <td>2</td>
+                    <td><input id="m103" type="number"></td>
+                </tr>
+                <tr>
+                    <td>M105</td>
+                    <td>JS</td>
+                    <td>3</td>
+                    <td><input id="m105" type="number"></td>
+                </tr>
+                <tr>
+                    <td>M107</td>
+                    <td>SWD</td>
+                    <td>3</td>
+                    <td><input id="m107" type="number"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <button id="add">Ajouter Stagiaire</button>
+    <table id="out">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Nom complet</th>
+                <th>Telephone</th>
+                <th>Filiere</th>
+                <th>Moyenne</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Stg2123</td>
+                <td>Hiba Masfouti</td>
+                <td>0532712343</td>
+                <td>Dev</td>
+                <td>13.5</td>
+                <td>Admis</td>
+            </tr>
+            <tr>
+                <td>Stg1234</td>
+                <td>abdemoujib Seghir</td>
+                <td>0623452167</td>
+                <td>Dev</td>
+                <td>8.3</td>
+                <td>Ajourne</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button id="admis">Nombre de stagiaires Admis</button>
+        <button id="noadmis">Nombre de stagiaires Non Admis</button>
+    </div>
+    <p></p>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
+ 
+</body>
+</html>

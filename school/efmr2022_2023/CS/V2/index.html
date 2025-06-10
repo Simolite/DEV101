@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFMR_2022-2023_CS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Liste des produits</h1>
+    <form>
+        <label for="code">Code :</label>
+        <input type="number" name="code" id="code" placeholder="Code" required>
+        <label for="titre">Titre :</label>
+        <input type="text" name="titre" id="titre" placeholder="Titre" required>
+        <label for="description">Description :</label>
+        <input type="text" name="description" id="description" placeholder="Description" required>
+        <label for="prix">Prix :</label>
+        <input type="number" name="prix" id="prix" placeholder="Prix" required>
+        <label for="categorie">Categorie :</label>
+        <input type="text" name="categorie" id="categorie" placeholder="Categorie" required>
+        <div>
+            <input type="submit" name="submit" id="submit" value="Sauvegarder">
+            <button id="annuler">Annuler</button>
+            <input type="reset" name="reset" id="reset" value="vider">
+        </div>
+
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Categorie</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div id="btns">
+        <button onclick="display(1)">Ajouter</button>
+        <button id="dell">Supprimer</button>
+    </div>
+    <div id="aff">
+        <button>Afficher list des categorie</button>
+    </div>
+    <ul>
+    </ul>
+    <script src="app.js"></script>
+</body>
+</html>

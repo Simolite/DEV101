@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>efmr_2022-2023_v1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Joueurs</h1>
+    <form>
+        <label for="code">Code Joueur :</label>
+        <input id="code" type="number" placeholder="Code Joueur" required>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" placeholder="Nom" required>
+        <label for="prenom">Prenom :</label>
+        <input type="text" id="prenom" placeholder="Prenom" required>
+        <label for="num">Numero :</label>
+        <input type="number" id="num" placeholder="Numero" required>
+        <label for="equipe">Equipe :</label>
+        <input type="text" id="equipe" placeholder="Equipe" required>
+        <div>
+            <input type="submit" id="submit" value="Sauvegarder">
+            <button id="cancel">Annuler</button>
+            <input type="reset" id="reset" value="Vider">
+        </div>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Code Joueur </th>
+                <th>Nom </th>
+                <th>Prenom </th>
+                <th>Numero </th>
+                <th>Equipe </th>
+            </tr>
+        </thead>
+    </table>
+    <div>
+        <button id="add">Ajouter</button>
+        <button id="dell">Supprimer</button>
+    </div>
+    <div>
+        <button>Afficher la liste des matches</button>
+    </div>
+    <ul>
+    </ul>
+    <script src="app.js"></script>
+</body>
+</html>

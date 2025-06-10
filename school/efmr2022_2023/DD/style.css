@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section {
+    display: flex;
+}
+
+table {
+    border: 1px solid #000;
+}
+th , td {
+    text-align: start;
+
+}

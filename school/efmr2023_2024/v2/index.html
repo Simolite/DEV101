@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EFMR_2023_2024_v2</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Age</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>NAJI</td>
+                <td>SALMA</td>
+                <td>10</td>
+                <td><img src="employe-de-bureau.jpg" alt="employes image"></td>
+            </tr>
+            <tr>
+                <td>BENNAJI</td>
+                <td>SARA</td>
+                <td>15</td>
+                <td><img src="employe-de-bureau.jpg" alt="employes image"></td>
+            </tr>
+            <tr>
+                <td>ALAOUI</td>
+                <td>KARIM</td>
+                <td>13</td>
+                <td><img src="employe-de-bureau.jpg" alt="employes image"></td>
+            </tr>
+        </tbody>
+    </table>
+    <form>
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" id="nom">
+        <label for="prenom">Prenom:</label>
+        <input type="text" name="prenom" id="prenom">
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age">
+        <label for="image">Photo:</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        <div>
+            <input type="submit" name="submit" id="submit" value="Ajouter">
+            <input type="reset" placeholder="Supprimer" name="reset" id="reset" value="Supprimer">
+        </div>
+    </form>
+    <img src="first.jpg" id="im1" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
