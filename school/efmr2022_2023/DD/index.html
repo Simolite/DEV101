@@ -7,8 +7,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="loader">Loader</button>
-    <button id="getAll">Get All Voitures</button>
+    <section id="voitures">
+
+    
+        <div>
+            <label for="marque">Marque:</label>
+            <input type="text" id="marque">
+            <button id="filter">Filtrer</button>
+        </div>
+        <button id="getAll">Get All Voitures</button>
+    </section>
+    <section id="verify">
+        <form>
+            <div>
+                <label for="nom">Nom:</label>
+                <input type="text" id="nom" placeholder="Nom">
+            </div>
+            <div>
+                <label for="prenom">Prenom:</label>
+                <input type="text" id="prenom" placeholder="Prenom">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Email">
+            </div>
+            <div>
+                <label for="com">Commentaire:</label>
+                <input type="text" id="com" placeholder="Tapez votre Commentaire">
+            </div>
+            <input type="submit" value="Envoyer" id="submit">
+        </form>
+    </section>
     <script src="app.js"></script>
 </body>
 </html>

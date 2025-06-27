@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>School Management App</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>School Management System</h1>
+    <nav>
+      <button onclick="showSection('students')">Add Students</button>
+      <button onclick="showSection('teachers')">Add Teachers</button>
+      <button onclick="showSection('results')">Add Results</button>
+    </nav>
+
+    <!-- Students Section -->
+    <section id="students" class="content-section">
+      <h2>Students</h2>
+      <form id="studentForm">
+        <input type="text" id="studentName" placeholder="Student Name" required />
+        <input type="number" id="studentAge" placeholder="Age" required />
+        <button type="submit">Add Student</button>
+      </form>
+      <ul id="studentList"></ul>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers" class="content-section hidden">
+      <h2>Teachers</h2>
+      <form id="teacherForm">
+        <input type="text" id="teacherName" placeholder="Teacher Name" required />
+        <input type="text" id="subject" placeholder="Subject" required />
+        <button type="submit">Add Teacher</button>
+      </form>
+      <ul id="teacherList"></ul>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="content-section hidden">
+      <h2>Results</h2>
+      <form id="resultForm">
+        <input type="text" id="resultStudent" placeholder="Student Name" required />
+        <input type="text" id="subjectResult" placeholder="Subject" required />
+        <input type="number" id="marks" placeholder="Marks" required />
+        <button type="submit">Add Result</button>
+      </form>
+      <ul id="resultList"></ul>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

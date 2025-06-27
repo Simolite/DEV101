@@ -4,14 +4,68 @@
     box-sizing: border-box;
 }
 
-section {
+body {
+    font-family: sans-serif;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    padding-top: 1vw;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    align-items: center;
+    gap: 1vw;
 }
 
 table {
     border: 1px solid #000;
+    border-collapse: collapse;
 }
-th , td {
-    text-align: start;
 
+tr {
+    border: 1px solid #ccc;
+}
+
+th , td {
+    text-align: center;
+    padding: 1vw;
+}
+
+button {
+    background: #f44;
+    padding: 0.6vw 1vw;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+
+}
+
+#getAll , #filter {
+    background: #44f;
+}
+
+div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3vw;
+}
+
+input{
+    width: 25vw;
+    height: 4vh;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 1vw;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
 }
