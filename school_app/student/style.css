@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Roboto,arial,sans-serif;
+    font-size: 1rem;
+}
+
+#darkmode {
+    background: #ccc;
+    width: 4vw;
+    height: 2vw;
+    border-radius: 2vw;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border: 1px solid #888;
+    transition: all ease 0.5s;
+}
+
+#toggel {
+    background: #ffffff;
+    width: 1.8vw;
+    height: 1.8vw;
+    margin: 0 1px;
+    border-radius: 0.9vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+}
+
+#darkmode:hover,#logout:hover {
+    scale: 1.1;
+    box-shadow: 0px 0px 5px 1px #000;
+    cursor: pointer;
+    transition: all ease 0.5s;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1vw;
+    background: #ccc;
+}
+
+button , a {
+    background: #fff;
+    width: 4vw;
+    height: 2vw;
+    border: 1px solid #888;
+    border-radius: 5px;
+    transition: all ease 0.5s;
+}
+
+a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+}
+
+#getmarks:hover {
+    background: #ccc;
+    cursor: pointer;
+    color: #fff;
+    transition: all ease 0.5s;
+}
+
+main {
+    margin: 10vh;
+    display: flex;
+    align-items: center;
+    width: 50vw;
+    gap: 1vw;
+}
+
+section{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+select{
+    padding: 0.5vw;
+    border-radius: 5px;
+}
+
+td,th,table{
+    border: 1px solid #000;
+    text-align: center;
+    border-collapse:collapse;
+
+}
+
+table {
+    translate: 20vw;
+    width: 10vw;
+}
