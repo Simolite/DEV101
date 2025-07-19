@@ -47,20 +47,7 @@ if ($_SESSION['role'] !== 'student') {
 
         <button id="getmarks">Get Marks</button>
 
-        <div class="card">
-            <table>
-                <thead>
-                    <th>Subject</th>
-                    <th>Mark</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="card"></div>
         
     </main>
     <script src="app.js"></script>

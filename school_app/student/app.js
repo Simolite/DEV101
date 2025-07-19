@@ -44,34 +44,55 @@ async function populateSubjects() {
     });
     let option = document.createElement('option');
     option.innerText = "All subjects";
-    option.value = "All";
+    option.value = "all";
     list.appendChild(option);
 }
 
 async function getMarks() {
-    let url;
-    if (document.getElementById('subject').value == 'All'){
-        url = `../api/get_marks.php?term=${document.getElementById('term').value}&sub=All`;
-    }else{
-        let subjectId = {'id':document.getElementById('subject').value};
-        url = `../api/get_marks.php?term=${document.getElementById('term').value}&sub=${subjectId}`;
+    let term = document.getElementById('term').value;
+    let subjectSelect = document.getElementById('subject');
+    let subjectId = subjectSelect.value;
+    let subjectName = subjectSelect.options[subjectSelect.selectedIndex].text;
+    
+    let subjects;
+    if (subjectId === 'all') {
+        subjects = 'all';
+    } else {
+        subjects = encodeURIComponent(JSON.stringify([{ id: subjectId, name: subjectName }]));
     }
 
+    let url = `../api/get_marks.php?term=${term}&sub=${subjects}`;
+    
     try {
-        let response = await fetch(url ,{headers: {'Accept': 'application/json'}} );
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
         let data = await response.json();
         return data;
-    } catch (error){
-        console.error("Error fetching terms:", error?.message || error);
+    } catch (error) {
+        console.error("Error fetching marks:", error?.message || error);
     }
 }
 
+
 async function populateMarks() {
     let marks = await getMarks();
-    if (!marks) return ;
+    if (marks.length == 0) return ;
     const subjectNames = Object.keys(marks);
     let i = 0;
-    let table = document.querySelector('tbody');
+    let tbody;
+    if (document.querySelector('tbody')){
+        tbody = document.querySelector('tbody');
+    } else {
+        let table = document.createElement('table');
+        tbody = document.createElement('tbody');
+        let thead = document.createElement('thead');
+        let th1 = document.createElement('th');
+        let th2 = document.createElement('th');
+        th1.innerText = 'Subject';
+        th2.innerText = 'Mark';
+        thead.append(th1,th2);
+        table.append(thead,tbody);
+        document.querySelector('.card').appendChild(table);
+    }
     for (const subject in marks) {
         const subjectMarks = marks[subject];
         subjectMarks.forEach(mark => {
@@ -83,7 +104,7 @@ async function populateMarks() {
             h3.innerText = mark.mark;
             td2.appendChild(h3);
             tr.append(td1,td2);
-            table.appendChild(tr);
+            tbody.appendChild(tr);
             i ++;
         });
         
@@ -92,18 +113,29 @@ async function populateMarks() {
 
 };
 
+function darkmode(){
+    let icon = document.querySelector('#toggel i');
+    let toggel = document.getElementById('toggel');
+    if(icon.className == 'fas fa-sun fa-lg'){
+        icon.className = 'fas fa-moon fa-lg';
+        document.body.style.background = '#000';
+        toggel.style.transform = "translateX(1.9vw)";
+    }else {
+        icon.className = 'fas fa-sun fa-lg';
+        document.body.style.background = '#fff';
+        toggel.style.transform = "translateX(0vw)";
+    }
+};
+
 populateTerms();
 
 populateSubjects();
 
 document.querySelector("#getmarks").addEventListener('click',async()=>{
-    // populateMarks();
-    let subjectId = {'id':document.getElementById('subject').value};
-    // url = `../api/get_marks.php?term=${document.getElementById('term').value}&sub=${subjectId}`;
-    let url = `../api/get_marks.php?term=${document.getElementById('term').value}&sub=${encodeURIComponent(JSON.stringify([{ id: subjectId }]))}`;
-    let response = await fetch(url);
-    let text = await response.text();
-    document.querySelector('td').innerHTML = text;
-
+    populateMarks();
 });
 
+
+document.querySelector("#darkmode").addEventListener('click',()=>{
+    darkmode();
+});
