@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 if ($_SESSION['role'] !== 'student') {
     header('Location: ../login/login.php');
@@ -32,9 +35,6 @@ if ($_SESSION['role'] !== 'student') {
             <h3>Please select the term : </h3>
             <select name="term" id="term">
                 <option value="0" selected disabled>Please select a term</option>
-                <option value="1">Term 1</option>
-                <option value="2">Term 2</option>
-                <option value="3">Term 3</option>
             </select>
         </section>
 
@@ -42,10 +42,6 @@ if ($_SESSION['role'] !== 'student') {
                 <h3>Please select a subject : </h3>
                 <select name="subject" id="subject">
                     <option value="0" selected disabled>Please select a subject</option>
-                    <option value="1">Subect 1</option>
-                    <option value="2">Subect 2</option>
-                    <option value="3">Subect 3</option>
-                    <option value="4">All subjects</option>
                 </select>
         </section>
 
@@ -58,14 +54,15 @@ if ($_SESSION['role'] !== 'student') {
                     <th>Mark</th>
                 </thead>
                 <tbody>
-                    <td>Math</td>
-                    <td>85%</td>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
         
     </main>
-
     <script src="app.js"></script>
 </body>
 </html>

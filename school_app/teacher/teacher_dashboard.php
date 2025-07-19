@@ -1,9 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    if($_SESSION['role'] !== 'teacher') {
-        header('Location: login.php');
-    }
-        
+}
+
+if($_SESSION['role'] !== 'teacher') {
+    header('Location: login.php');
+}  
 ?>
 <!DOCTYPE html>
 <html lang="en">

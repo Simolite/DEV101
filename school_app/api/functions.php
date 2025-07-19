@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!in_array($_SESSION['role'], ['student', 'teacher', 'admin'])){
     header('Location: login.php');
@@ -16,7 +18,10 @@ function getTerms($conn){
     return $terms;   
 }
 
-function getStudentSubjects($conn, $student_id = $_SESSION['linked_id']){
+function getStudentSubjects($conn, $student_id = null){
+    if ($student_id === null && isset($_SESSION['linked_id'])) {
+        $student_id = $_SESSION['linked_id'];
+    }
     $stmt = "SELECT id, name FROM subjects WHERE id IN (SELECT subject_id FROM class_subject WHERE class_id = (SELECT class_id FROM students WHERE id = $student_id))";
     $result = $conn->query($stmt);
     $subjects = [];
@@ -26,7 +31,7 @@ function getStudentSubjects($conn, $student_id = $_SESSION['linked_id']){
     return $subjects;
 }
 
-function getStudentMarks($conn, $student_id,$subjects,$term){
+function getAllStudentMarks($conn, $student_id,$subjects,$term){
     $marks = [];
     foreach($subjects as $subject){
         $subject_id = $subject['id'];

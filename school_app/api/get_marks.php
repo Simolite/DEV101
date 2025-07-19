@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 header('Content-Type: application/json');
 
@@ -21,10 +23,6 @@ if (!isset($_GET['term']) || !is_numeric($_GET['term'])) {
     exit;
 }
 
-if (!isset($_GET['student_id']) || !is_numeric($_GET['student_id'])) {
-    echo json_encode(['error' => 'Invalid or missing student_id']);
-    exit;
-}
 
 if ($_SESSION['role'] === 'student'){
     $student_id = $_SESSION['linked_id'];
@@ -32,11 +30,13 @@ if ($_SESSION['role'] === 'student'){
     $student_id = $_GET['student_id'];
 }
 
-$subjects = getStudentSubjects($conn, $student_id);
 
 $term = intval($_GET['term']);
-
-$marks = getStudentMarks($conn, $student_id,$subjects,$term);
-
+if ($_GET['sub'] == 'All'){
+    $subjects = getStudentSubjects($conn, $student_id);
+}else {
+    $subjects = json_decode($_GET['sub'], true);
+};
+$marks = getAllStudentMarks($conn, $student_id,$subjects,$term);
 echo json_encode($marks);
 ?>
