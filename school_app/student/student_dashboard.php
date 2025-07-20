@@ -8,13 +8,23 @@ if ($_SESSION['role'] !== 'student') {
     header('Location: ../login/login.php');
     exit;
 }
+$linked_id = $_SESSION['linked_id'];
+$conn = new mysqli('localhost', 'root', '', 'school_app');
 
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$sql = "SELECT fname FROM students WHERE id = '$linked_id'";
+$result = $conn->query($sql);
+$user = $result->fetch_assoc();
+$fname = $user['fname'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +36,7 @@ if ($_SESSION['role'] !== 'student') {
 
     <header>
         <a id="logout" href="../login/logout.php">Logout</a>
-        <H1>Hey Tom</H1>
+        <H1><?php echo 'Hey '.$fname;?></H1>
         <div id="darkmode"><div id="toggel"><i class="fas fa-sun fa-lg"></i></div></div>
     </header>
 
@@ -46,6 +56,7 @@ if ($_SESSION['role'] !== 'student') {
         </section>
 
         <button id="getmarks">Get Marks</button>
+        <button id="delmarks">Delete Marks</button>
 
         <div class="card"></div>
         

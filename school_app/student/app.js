@@ -120,10 +120,16 @@ function darkmode(){
         icon.className = 'fas fa-moon fa-lg';
         document.body.style.background = '#000';
         toggel.style.transform = "translateX(1.9vw)";
+        document.body.style.color = "#fff";
+        document.querySelector('i').style.color = "#fff";
+        document.getElementById("toggel").style.background = "#000";
     }else {
         icon.className = 'fas fa-sun fa-lg';
         document.body.style.background = '#fff';
         toggel.style.transform = "translateX(0vw)";
+        document.body.style.color = "#000";
+        document.querySelector('i').style.color = "#000";
+        document.getElementById("toggel").style.background = "#fff";
     }
 };
 
@@ -131,10 +137,19 @@ populateTerms();
 
 populateSubjects();
 
+function resetMarks(){
+    if(document.querySelector('table')){
+        document.querySelector('table').remove();
+    };
+};
+
 document.querySelector("#getmarks").addEventListener('click',async()=>{
     populateMarks();
 });
 
+document.querySelector("#delmarks").addEventListener('click',()=>{
+    resetMarks();
+});
 
 document.querySelector("#darkmode").addEventListener('click',()=>{
     darkmode();

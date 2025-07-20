@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         switch ($user['role']) {
             case 'admin':
                 $_SESSION['role'] = 'admin';
+                $_SESSION['linked_id'] = $user['linked_id'];
                 header('Location: ../admin/admin_dashboard.php');
                 break;
             case 'teacher':
