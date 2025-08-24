@@ -50,7 +50,7 @@ header{
     background: #ccc;
 }
 
-button , a {
+a {
     background: #fff;
     width: 4vw;
     height: 2vw;
@@ -75,11 +75,12 @@ a {
 }
 
 main {
-    margin: 10vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 50vw;
+    justify-content: center;
     gap: 1vw;
+    margin-top: 5vh;
 }
 
 section{
@@ -88,19 +89,9 @@ section{
     gap: 1vw;
 }
 
-select{
+select,input,button{
     padding: 0.5vw;
     border-radius: 5px;
-}
-
-td,th,table{
-    border: 1px solid #000;
-    text-align: center;
-    border-collapse:collapse;
-
-}
-
-table {
-    translate: 20vw;
-    width: 10vw;
+    background:#ccc;
+    border: 1px solid #aaa;
 }

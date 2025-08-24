@@ -3,7 +3,7 @@ function darkmode(){
     let toggel = document.getElementById('toggel');
     if(icon.className == 'fas fa-sun fa-lg'){
         icon.className = 'fas fa-moon fa-lg';
-        document.body.style.background = '#000';
+        document.body.style.background = '#222';
         toggel.style.transform = "translateX(1.9vw)";
         document.body.style.color = "#fff";
         document.querySelector('i').style.color = "#fff";
