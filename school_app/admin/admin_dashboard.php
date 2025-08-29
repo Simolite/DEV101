@@ -1,23 +1,35 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-};
+}
 
-if($_SESSION['role'] !== 'admin') {
+if ($_SESSION['role'] !== 'admin') {
     header('Location: login.php');
-};
+    exit;
+}
 
 $linked_id = $_SESSION['linked_id'];
-$conn = new mysqli('localhost', 'root', '', 'school_app');
 
+$conn = new mysqli('localhost', 'root', '', 'school_app');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT fname FROM admins WHERE id = '$linked_id'";
-$result = $conn->query($sql);
-$user = $result->fetch_assoc();
-$fname = $user['fname'];
+
+$stmt = $conn->prepare("SELECT fname FROM admins WHERE id = ?");
+$stmt->bind_param("i", $linked_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $fname = $row['fname'];
+} else {
+    $fname = "Unknown";
+}
+
+$stmt->close();
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

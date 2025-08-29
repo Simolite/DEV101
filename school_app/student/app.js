@@ -79,7 +79,7 @@ async function populateMarks() {
     const subjectNames = Object.keys(marks);
     let i = 0;
     let tbody;
-    if (document.querySelector('tbody')){
+    if (document.querySelector('#marks_section tbody')){
         tbody = document.querySelector('tbody');
     } else {
         let table = document.createElement('table');
@@ -91,7 +91,7 @@ async function populateMarks() {
         th2.innerText = 'Mark';
         thead.append(th1,th2);
         table.append(thead,tbody);
-        document.querySelector('.card').appendChild(table);
+        document.querySelector('#marks_section').appendChild(table);
     }
     for (const subject in marks) {
         const subjectMarks = marks[subject];
@@ -113,25 +113,22 @@ async function populateMarks() {
 
 };
 
-function darkmode(){
-    let icon = document.querySelector('#toggel i');
-    let toggel = document.getElementById('toggel');
-    if(icon.className == 'fas fa-sun fa-lg'){
+function darkmode() {
+    const body = document.body;
+    const icon = document.querySelector('#toggel i');
+    const toggel = document.getElementById('toggel');
+
+    body.classList.toggle('dark-mode');
+
+    if (body.classList.contains('dark-mode')) {
         icon.className = 'fas fa-moon fa-lg';
-        document.body.style.background = '#222';
         toggel.style.transform = "translateX(1.9vw)";
-        document.body.style.color = "#fff";
-        document.querySelector('i').style.color = "#fff";
-        document.getElementById("toggel").style.background = "#000";
-    }else {
+    } else {
         icon.className = 'fas fa-sun fa-lg';
-        document.body.style.background = '#fff';
         toggel.style.transform = "translateX(0vw)";
-        document.body.style.color = "#000";
-        document.querySelector('i').style.color = "#000";
-        document.getElementById("toggel").style.background = "#fff";
     }
-};
+}
+
 
 function resetMarks(){
     if(document.querySelector('table')){
@@ -153,4 +150,63 @@ document.querySelector("#delmarks").addEventListener('click',()=>{
 
 document.querySelector("#darkmode").addEventListener('click',()=>{
     darkmode();
+});
+
+let studentInfo;
+
+async function getStudentInfo() {
+    let url = `../api/getStudentInfo.php`;
+    
+    try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        studentInfo = await response.json();
+        return studentInfo;     
+    } catch (error) {
+        console.error("Error fetching Info:", error?.message || error);
+    }
+}
+
+async function getAnnouncements(){
+    await getStudentInfo();
+    let url = `../api/getAnnouncements.php?audience=all&class_id=${studentInfo.class_id}`;
+    let data;
+    try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        data = await response.json();
+    } catch (error) {
+        console.error("Error fetching Announcements:", error?.message || error);
+    };
+    let tbody = document.querySelector("#notifactions_section tbody");
+    data.forEach(announ =>{
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+        td1.innerText = announ.title;
+        td2.innerText = announ.body;
+        td3.innerText = announ.created_at;
+        tr.append(td1,td2,td3);
+        tbody.appendChild(tr);
+    }) 
+}
+
+getAnnouncements();
+
+function toggleSection(activeBtn,showId){
+    document.querySelector('.selected').classList.remove("selected");
+    document.getElementById(activeBtn).classList.add("selected");
+    let mains = document.querySelectorAll("main");
+    let mainsArray = Array.from(mains);
+    mainsArray.forEach(elem =>{
+        elem.classList.add('hidden');
+    });
+    document.getElementById(showId).classList.remove('hidden');
+}
+
+document.querySelector("#marks").addEventListener('click',()=>{
+    toggleSection('marks','marks_section');
+});
+
+document.querySelector("#notifaction").addEventListener('click',()=>{
+    toggleSection('notifaction','notifactions_section');
 });

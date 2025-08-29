@@ -76,5 +76,27 @@ function addMark($conn,$student_id,$subject_id,$mark,$term_id,$date){
     $conn->query($sql);
 }
 
+function getAnnouncements($conn,$audience,$class_id=0){
+    $announcements = [];
+    if($class_id==0){
+        $sql = "SELECT * FROM announcements WHERE audience = '$audience'";
+    }else{
+        $sql = "SELECT * FROM announcements WHERE audience = '$audience' OR class_id = $class_id";
+    }
+    $result = $conn->query($sql);
+    while ($row = $result->fetch_assoc()){
+        $announcements[] = $row;
+    } 
+    return $announcements;
+}
+
+function getStudentInfo($conn,$id){
+    $student = [];
+    $sql = "SELECT * FROM students WHERE id = '$id'";
+    $result = $conn->query($sql);
+    $student = $result->fetch_assoc();
+    return $student;
+}
+
 
 ?>

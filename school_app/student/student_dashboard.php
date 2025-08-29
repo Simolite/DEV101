@@ -40,7 +40,16 @@ $fname = $user['fname'];
         <div id="darkmode"><div id="toggel"><i class="fas fa-sun fa-lg"></i></div></div>
     </header>
 
-    <main>
+    <nav>
+        <div id="notifaction" class="selected"><i class="fas fa-bell fa-xl"></i>Notifactions</div>
+        <div id="attendance"><i class="fas fa-calendar-check fa-xl"></i>Attendance</div>
+        <div id="events"><i class="fas fa-calendar-plus fa-xl"></i>Events</div>
+        <div id="time_table"><i class="fas fa-calendar-alt fa-xl"></i>Time Table</div>
+        <div id="marks"><i class="fas fa-clipboard-check fa-xl"></i>Marks</div>
+        <div id="report_card"><i class="fas fa-sticky-note fa-xl"></i>Report Card</div>
+    </nav>
+
+    <main class="hidden" id="marks_section">
         <section class='term'>
             <h3>Please select the term : </h3>
             <select name="term" id="term">
@@ -55,11 +64,25 @@ $fname = $user['fname'];
                 </select>
         </section>
 
-        <button id="getmarks">Get Marks</button>
-        <button id="delmarks">Delete Marks</button>
+        <section class="buttons">
+            <button id="getmarks">Get Marks</button>
+            <button id="delmarks">Clear Marks</button>
+        </section>
 
-        <div class="card"></div>
-        
+
+    </main>
+
+    <main id="notifactions_section">
+        <table>
+            <thead>
+                <th>Title</th>
+                <th>Notifaction</th>
+                <th>Notifaction Date</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </main>
     <script src="app.js"></script>
 </body>
