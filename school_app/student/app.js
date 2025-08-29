@@ -133,15 +133,15 @@ function darkmode(){
     }
 };
 
-populateTerms();
-
-populateSubjects();
-
 function resetMarks(){
     if(document.querySelector('table')){
         document.querySelector('table').remove();
     };
 };
+
+populateTerms();
+
+populateSubjects();
 
 document.querySelector("#getmarks").addEventListener('click',async()=>{
     populateMarks();

@@ -36,24 +36,24 @@ $fname = $user['fname'];
         <div id="darkmode"><div id="toggel"><i class="fas fa-sun fa-lg"></i></div></div>
     </header>
     <main>
-        <section>
+        <section id="input">
             <select name="class" id="class">
                 <option value="0" selected disabled>Please select a class</option>
-                <option value="1">DEV101</option>
+            </select>
+            <select name="subject" id="subject">
+                <option value="0" selected disabled>Please select a subject</option>
             </select>
             <select name="student" id="student">
                 <option value="0" selected disabled>Please select a student</option>
-                <option value="1">Brahim Mellali</option>
             </select>
             <select name="term" id="term">
                 <option value="0" selected disabled>Please select a term</option>
-                <option value="1">Term 1</option>
             </select>
         </section>
         <section>
-            <input type="number">
-            <input type="date">
-            <button>Submit</button>
+            <input id="mark" type="number">
+            <input id="date" type="date">
+            <button id="submit">Submit</button>
         </section>
     </main>
     <script src="app.js"></script>
