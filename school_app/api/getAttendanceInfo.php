@@ -18,7 +18,10 @@ if ($conn->connect_error) {
     exit;
 }
 
-$student = getStudentInfo($conn,$_SESSION['linked_id']);
 
-echo json_encode($student);
+$student_id = $_SESSION['linked_id'];
+
+$attendance = getAttendanceInfo($conn,$student_id);
+
+echo json_encode($attendance);
 ?>

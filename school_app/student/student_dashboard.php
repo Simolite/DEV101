@@ -14,10 +14,18 @@ $conn = new mysqli('localhost', 'root', '', 'school_app');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT fname FROM students WHERE id = '$linked_id'";
+$sql = "SELECT * FROM students WHERE id = '$linked_id'";
 $result = $conn->query($sql);
 $user = $result->fetch_assoc();
 $fname = $user['fname'];
+$sql = "SELECT url FROM time_table WHERE teacher_id = '$linked_id'";
+$result = $conn->query($sql);
+$time_table = $result->fetch_assoc();
+$url = $time_table['url'];
+$parent_id = $user['parent_id'];
+$sql = "SELECT * FROM parents WHERE id = '$parent_id'";
+$result = $conn->query($sql);
+$parent = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -41,13 +49,42 @@ $fname = $user['fname'];
     </header>
 
     <nav>
-        <div id="notifaction" class="selected"><i class="fas fa-bell fa-xl"></i>Notifactions</div>
+        <div id="notifaction" class="selected"><i class="fas fa-bell fa-xl"></i>Main</div>
         <div id="attendance"><i class="fas fa-calendar-check fa-xl"></i>Attendance</div>
-        <div id="events"><i class="fas fa-calendar-plus fa-xl"></i>Events</div>
-        <div id="time_table"><i class="fas fa-calendar-alt fa-xl"></i>Time Table</div>
         <div id="marks"><i class="fas fa-clipboard-check fa-xl"></i>Marks</div>
-        <div id="report_card"><i class="fas fa-sticky-note fa-xl"></i>Report Card</div>
+        <div id="time"><i class="fas fa-calendar-alt fa-xl"></i>Time Table</div>
+        <div id="report"><i class="fas fa-sticky-note fa-xl"></i>Report Card</div>
     </nav>
+
+    <main id="notifactions_section">
+        <div id="student_info">
+            <img id="student_img" src="student_img.jpg" alt="student img">
+            <div id="info_container">
+                <div>Name :<?php echo $user['fname'].' '.$user['lname']?></div>
+                <div>Birth Date :<?php echo $user['birth_date']?></div>
+                <div>Email :<?php echo $user['email']?></div>
+                <div>Parent Name :<?php echo $parent['fname'].' '.$parent['lname']?></div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <th>Title</th>
+                <th>Notifaction</th>
+                <th>Notifaction Date</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </main>
+    <main class="hidden" id="attendance_section">
+        <h2>Hello you have <span id="absnum"></span> absents in <span id="absdays"></span> days</h2>
+        <table>
+            <thead><th>Subject</th><th>Date</th></thead>
+            <tbody></tbody>
+        </table>
+    </main>
 
     <main class="hidden" id="marks_section">
         <section class='term'>
@@ -71,17 +108,21 @@ $fname = $user['fname'];
 
 
     </main>
-
-    <main id="notifactions_section">
+    <main id="time_section" class="hidden">
+        <img src="<?php echo $url;?>" alt="TimeTable">
+    </main>
+    <main id="report_section" class="hidden">
         <table>
             <thead>
-                <th>Title</th>
-                <th>Notifaction</th>
-                <th>Notifaction Date</th>
+                <th>Term</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Score</th>
+                <th>Rank</th>
+                <th>Comment</th>
+                <th>Report Card</th>
             </thead>
-            <tbody>
-
-            </tbody>
+            <tbody></tbody>
         </table>
     </main>
     <script src="app.js"></script>

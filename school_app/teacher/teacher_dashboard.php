@@ -16,6 +16,13 @@ $sql = "SELECT fname FROM teachers WHERE id = '$linked_id'";
 $result = $conn->query($sql);
 $user = $result->fetch_assoc();
 $fname = $user['fname'];
+$sql = "SELECT url FROM time_table WHERE teacher_id = '$linked_id'";
+$result = $conn->query($sql);
+$time_table = $result->fetch_assoc();
+$url = $time_table['url'];
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,12 +42,31 @@ $fname = $user['fname'];
         <H1><?php echo 'Hey '.$fname;?></H1>
         <div id="darkmode"><div id="toggel"><i class="fas fa-sun fa-lg"></i></div></div>
     </header>
-    <main>
-        <section id="input">
-            <select name="class" id="class">
+
+    <nav>
+        <div id="notifaction" class="selected"><i class="fas fa-bell fa-xl"></i>Notifactions</div>
+        <div id="attendance"><i class="fas fa-calendar-check fa-xl"></i>Attendance</div>
+        <div id="marks"><i class="fas fa-clipboard-check fa-xl"></i>Marks</div>
+        <div id="time"><i class="fas fa-calendar-alt fa-xl"></i>Time Table</div>
+    </nav>
+    <main id="notifactions_section">
+        <table>
+            <thead>
+                <th>Title</th>
+                <th>Notifaction</th>
+                <th>Notifaction Date</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </main>
+    <main id="marks_section" class="hidden">
+        <section id="Markinput">
+            <select name="Markclass" id="Markclass">
                 <option value="0" selected disabled>Please select a class</option>
             </select>
-            <select name="subject" id="subject">
+            <select name="Marksubject" id="Marksubject">
                 <option value="0" selected disabled>Please select a subject</option>
             </select>
             <select name="student" id="student">
@@ -52,9 +78,36 @@ $fname = $user['fname'];
         </section>
         <section>
             <input id="mark" type="number">
-            <input id="date" type="date">
-            <button id="submit">Submit</button>
+            <input id="Markdate" type="date">
+            <button id="Marksubmit">Submit</button>
         </section>
+    </main>
+    <main id="attendance_section" class="hidden">
+        <section id="Attinput">
+            <select name="Attclass" id="Attclass">
+                <option value="0" selected disabled>Please select a class</option>
+            </select>
+            <select name="Attsub" id="Attsub">
+                <option value="0" selected disabled>Please select a subject</option>
+            </select>
+            <button id="getAttList">Get Attendance List</button>
+
+        </section>
+        <section>
+            <table>
+                <thead>
+                    <th>Student Name</th>
+                    <th>Absent</th>
+                </thead>
+            </table>
+        </section>
+        <section>
+            <input id="Attdate" type="date">
+            <button id="submitAtt">Submit</button>
+        </section>
+    </main>
+    <main id="time_section" class="hidden">
+        <img src="<?php echo $url;?>" alt="TimeTable">
     </main>
     <script src="app.js"></script>
 </body>

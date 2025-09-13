@@ -72,46 +72,54 @@ async function getMarks() {
     }
 }
 
-
 async function populateMarks() {
     let marks = await getMarks();
-    if (marks.length == 0) return ;
-    const subjectNames = Object.keys(marks);
-    let i = 0;
+    if (!marks || Object.keys(marks).length === 0) return;
+
     let tbody;
-    if (document.querySelector('#marks_section tbody')){
-        tbody = document.querySelector('tbody');
+    if (document.querySelector('#marks_section tbody')) {
+        tbody = document.querySelector('#marks_section tbody');
+        tbody.innerHTML = "";
     } else {
         let table = document.createElement('table');
         tbody = document.createElement('tbody');
         let thead = document.createElement('thead');
+        
+        let trHead = document.createElement('tr');
         let th1 = document.createElement('th');
         let th2 = document.createElement('th');
+        let th3 = document.createElement('th');
+        
         th1.innerText = 'Subject';
         th2.innerText = 'Mark';
-        thead.append(th1,th2);
-        table.append(thead,tbody);
+        th3.innerText = 'Exam Date';
+        
+        trHead.append(th1, th2, th3);
+        thead.appendChild(trHead);
+
+        table.append(thead, tbody);
         document.querySelector('#marks_section').appendChild(table);
     }
+
     for (const subject in marks) {
         const subjectMarks = marks[subject];
+
         subjectMarks.forEach(mark => {
             let tr = document.createElement('tr');
             let td1 = document.createElement('td');
             let td2 = document.createElement('td');
-            let h3 = document.createElement('h3');
-            td1.innerText = subjectNames[i];
-            h3.innerText = mark.mark;
-            td2.appendChild(h3);
-            tr.append(td1,td2);
+            let td3 = document.createElement('td');
+
+            td1.innerText = subject;   
+            td2.innerText = mark.mark;    
+            td3.innerText = mark.exam_date; 
+
+            tr.append(td1, td2, td3);
             tbody.appendChild(tr);
-            i ++;
         });
-        
     }
 
-
-};
+}
 
 function darkmode() {
     const body = document.body;
@@ -132,7 +140,7 @@ function darkmode() {
 
 function resetMarks(){
     if(document.querySelector('table')){
-        document.querySelector('table').remove();
+        document.querySelector('#marks_section table').remove();
     };
 };
 
@@ -152,23 +160,23 @@ document.querySelector("#darkmode").addEventListener('click',()=>{
     darkmode();
 });
 
-let studentInfo;
+let userInfo;
 
-async function getStudentInfo() {
-    let url = `../api/getStudentInfo.php`;
+async function getUserInfo() {
+    let url = `../api/getUserInfo.php`;
     
     try {
         let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
-        studentInfo = await response.json();
-        return studentInfo;     
+        userInfo = await response.json();
+        return userInfo;     
     } catch (error) {
         console.error("Error fetching Info:", error?.message || error);
     }
 }
 
 async function getAnnouncements(){
-    await getStudentInfo();
-    let url = `../api/getAnnouncements.php?audience=all&class_id=${studentInfo.class_id}`;
+    await getUserInfo();
+    let url = `../api/getAnnouncements.php?audience=all&class_id=${userInfo.class_id}`;
     let data;
     try {
         let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
@@ -210,3 +218,83 @@ document.querySelector("#marks").addEventListener('click',()=>{
 document.querySelector("#notifaction").addEventListener('click',()=>{
     toggleSection('notifaction','notifactions_section');
 });
+document.querySelector("#attendance").addEventListener('click',()=>{
+    toggleSection('attendance','attendance_section');
+});
+document.querySelector("#report").addEventListener('click',()=>{
+    toggleSection('report','report_section');
+});
+
+
+
+async function getAttInfo(){
+    let url = `../api/getAttendanceInfo.php`;
+    let data;
+    let num = document.querySelector("#absnum");
+    let absdays = document.querySelector("#absdays");
+    try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        data = await response.json();
+    } catch (error) {
+        console.error("Error fetching marks:", error?.message || error);
+    }
+    data.forEach(absent=>{
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        td1.innerText = absent.subject_name;
+        td2.innerText = absent.date;
+        tr.append(td1,td2);
+        document.querySelector("#attendance_section tbody").appendChild(tr);
+    });
+    num.innerText = data.length;
+    absdays.innerText = countUniqueDates(data);
+}
+
+function countUniqueDates(records) {
+    let dates = records.map(r => r.date); 
+    let uniqueDates = new Set(dates);  
+    return uniqueDates.size;          
+}
+getAttInfo();
+
+document.querySelector("#time").addEventListener('click',()=>{
+    toggleSection('time','time_section');
+});
+
+async function getReport(){
+    let url = `../api/getReport.php`;
+    let data;
+    let tbody = document.querySelector("#report_section tbody")
+        try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        data = await response.json();
+    } catch (error) {
+        console.error("Error fetching marks:", error?.message || error);
+    }
+        data.forEach(report=>{
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+            let td3 = document.createElement("td");
+            let td4 = document.createElement("td");
+            let td5 = document.createElement("td");
+            let td6 = document.createElement("td");
+            let td7 = document.createElement("td");
+            let btn = document.createElement("a");
+            td1.innerText = report.term_name;
+            td2.innerText = report.start_date;
+            td3.innerText = report.end_date;
+            td4.innerText = report.average_score;
+            td5.innerText = report.rank;
+            td6.innerText = report.comments;
+            btn.innerText = "Click here to get the report"
+            btn.href = report.url;
+            td7.appendChild(btn);
+            tr.append(td1,td2,td3,td4,td5,td6,td7);
+            tbody.appendChild(tr);
+        });
+};
+
+
+getReport();

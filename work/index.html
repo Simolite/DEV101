@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملف الطالب - مدرسة الهجرة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .grade-excellent { background: linear-gradient(45deg, #10b981, #34d399); }
+        .grade-good { background: linear-gradient(45deg, #3b82f6, #60a5fa); }
+        .grade-average { background: linear-gradient(45deg, #f59e0b, #fbbf24); }
+        .grade-poor { background: linear-gradient(45deg, #ef4444, #f87171); }
+        
+        .notification-unread {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .tab-active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                        <span class="text-2xl">🎓</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">مدرسة الهجرة</h1>
+                        <p class="text-blue-100">ملف الطالب</p>
+                    </div>
+                </div>
+                <button onclick="logout()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
+                    تسجيل الخروج
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Student Profile Card -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <div class="text-center mb-6">
+                        <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-blue-500">
+                            <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold">
+                                أ.م
+                            </div>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">أحمد محمد العلي</h2>
+                        <p class="text-blue-600 font-semibold">الصف الثالث الثانوي - القسم العلمي</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">تاريخ الميلاد:</span>
+                            <span class="font-semibold">15/03/2006</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">العمر:</span>
+                            <span class="font-semibold">17 سنة</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">الجنس:</span>
+                            <span class="font-semibold">ذكر</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">رقم الطالب:</span>
+                            <span class="font-semibold">2024001</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">الصف:</span>
+                            <span class="font-semibold">الثالث الثانوي</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">البريد الإلكتروني:</span>
+                            <span class="font-semibold">ahmed.ali@alhijra.edu.sa</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">ولي الأمر:</span>
+                            <span class="font-semibold">محمد العلي</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2">
+                            <span class="text-gray-600">رقم الهاتف:</span>
+                            <span class="font-semibold">+966 50 123 4567</span>
+                        </div>
+                    </div>
+
+                    <!-- Overall GPA -->
+                    <div class="mt-6 p-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg text-white text-center">
+                        <h3 class="text-lg font-semibold mb-2">المعدل العام</h3>
+                        <div class="text-3xl font-bold">85.5%</div>
+                        <p class="text-sm opacity-90">جيد جداً</p>
+                    </div>
+                </div>
+
+                <!-- Class Schedule -->
+                <div class="bg-white rounded-xl card-shadow p-6 mt-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">جدول الحصص</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                                    <th class="p-3 text-center rounded-tr-lg">الحصة</th>
+                                    <th class="p-3 text-center">الأحد</th>
+                                    <th class="p-3 text-center">الاثنين</th>
+                                    <th class="p-3 text-center">الثلاثاء</th>
+                                    <th class="p-3 text-center">الأربعاء</th>
+                                    <th class="p-3 text-center rounded-tl-lg">الخميس</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 bg-gray-50 font-semibold">الأولى<br><span class="text-xs text-gray-500">8:00-8:45</span></td>
+                                    <td class="p-2 bg-green-50">القرآن الكريم<br><span class="text-xs text-gray-600">حفظ</span></td>
+                                    <td class="p-2 bg-blue-50">اللغة العربية<br><span class="text-xs text-gray-600">نحو</span></td>
+                                    <td class="p-2 bg-purple-50">القرآن الكريم<br><span class="text-xs text-gray-600">تلاوة</span></td>
+                                    <td class="p-2 bg-yellow-50">السيرة النبوية</td>
+                                    <td class="p-2 bg-pink-50">الفقه والعقيدة</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 bg-gray-50 font-semibold">الثانية<br><span class="text-xs text-gray-500">8:45-9:30</span></td>
+                                    <td class="p-2 bg-blue-50">اللغة العربية<br><span class="text-xs text-gray-600">أدب</span></td>
+                                    <td class="p-2 bg-green-50">القرآن الكريم<br><span class="text-xs text-gray-600">تفسير</span></td>
+                                    <td class="p-2 bg-yellow-50">الأحاديث</td>
+                                    <td class="p-2 bg-purple-50">القرآن الكريم<br><span class="text-xs text-gray-600">حفظ</span></td>
+                                    <td class="p-2 bg-blue-50">اللغة العربية<br><span class="text-xs text-gray-600">إملاء</span></td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 bg-gray-50 font-semibold">الثالثة<br><span class="text-xs text-gray-500">9:30-10:15</span></td>
+                                    <td class="p-2 bg-yellow-50">التاريخ الإسلامي</td>
+                                    <td class="p-2 bg-pink-50">الأخلاق الإسلامية</td>
+                                    <td class="p-2 bg-green-50">القرآن الكريم<br><span class="text-xs text-gray-600">حفظ</span></td>
+                                    <td class="p-2 bg-blue-50">اللغة العربية<br><span class="text-xs text-gray-600">تعبير</span></td>
+                                    <td class="p-2 bg-yellow-50">السيرة النبوية</td>
+                                </tr>
+                                <tr class="bg-orange-100">
+                                    <td class="p-3 bg-orange-200 font-semibold">استراحة<br><span class="text-xs text-gray-500">10:15-10:30</span></td>
+                                    <td colspan="5" class="p-2 text-center font-semibold text-orange-700">فترة الاستراحة</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 bg-gray-50 font-semibold">الرابعة<br><span class="text-xs text-gray-500">10:30-11:15</span></td>
+                                    <td class="p-2 bg-purple-50">القرآن الكريم<br><span class="text-xs text-gray-600">تجويد</span></td>
+                                    <td class="p-2 bg-yellow-50">الفقه والعقيدة</td>
+                                    <td class="p-2 bg-blue-50">اللغة العربية<br><span class="text-xs text-gray-600">قراءة</span></td>
+                                    <td class="p-2 bg-green-50">القرآن الكريم<br><span class="text-xs text-gray-600">تفسير</span></td>
+                                    <td class="p-2 bg-purple-50">الأحاديث</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 bg-gray-50 font-semibold">الخامسة<br><span class="text-xs text-gray-500">11:15-12:00</span></td>
+                                    <td class="p-2 bg-pink-50">الأخلاق الإسلامية</td>
+                                    <td class="p-2 bg-purple-50">القرآن الكريم<br><span class="text-xs text-gray-600">تلاوة</span></td>
+                                    <td class="p-2 bg-yellow-50">التاريخ الإسلامي</td>
+                                    <td class="p-2 bg-pink-50">الأخلاق الإسلامية</td>
+                                    <td class="p-2 bg-green-50">المواظبة على الصلاة</td>
+                                </tr>
+                                <tr class="border-b border-gray-200">
+                                    <td class="p-3 bg-gray-50 font-semibold">السادسة<br><span class="text-xs text-gray-500">12:00-12:45</span></td>
+                                    <td class="p-2 bg-green-50">المواظبة على الصلاة</td>
+                                    <td class="p-2 bg-blue-50">اللغة العربية<br><span class="text-xs text-gray-600">بلاغة</span></td>
+                                    <td class="p-2 bg-pink-50">الأخلاق الإسلامية</td>
+                                    <td class="p-2 bg-yellow-50">التاريخ الإسلامي</td>
+                                    <td class="p-2 bg-purple-50">القرآن الكريم<br><span class="text-xs text-gray-600">تفسير</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="lg:col-span-2">
+                <!-- Tabs -->
+                <div class="bg-white rounded-xl card-shadow mb-6">
+                    <div class="flex border-b border-gray-200">
+                        <button onclick="showTab('grades')" id="grades-tab" class="tab-active px-6 py-4 font-semibold rounded-tl-xl transition-all">
+                            الدرجات
+                        </button>
+                        <button onclick="showTab('attendance')" id="attendance-tab" class="px-6 py-4 font-semibold text-gray-600 hover:text-blue-600 transition-all">
+                            الحضور والغياب
+                        </button>
+                        <button onclick="showTab('behavior')" id="behavior-tab" class="px-6 py-4 font-semibold text-gray-600 hover:text-blue-600 transition-all">
+                            السلوك
+                        </button>
+                        <button onclick="showTab('activities')" id="activities-tab" class="px-6 py-4 font-semibold text-gray-600 hover:text-blue-600 transition-all">
+                            الأنشطة
+                        </button>
+                    </div>
+
+                    <!-- Grades Tab -->
+                    <div id="grades-content" class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">درجات الفصل الدراسي الأول</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-excellent rounded-full flex items-center justify-center text-white font-bold">
+                                        📖
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">القرآن الكريم - حفظ</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: عبدالرحمن أحمد</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-green-600">95%</div>
+                                    <div class="text-sm text-gray-500">ممتاز</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-excellent rounded-full flex items-center justify-center text-white font-bold">
+                                        🎵
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">القرآن الكريم - تلاوة وتجويد</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: محمد الحافظ</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-green-600">92%</div>
+                                    <div class="text-sm text-gray-500">ممتاز</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-good rounded-full flex items-center justify-center text-white font-bold">
+                                        📚
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">القرآن الكريم - تفسير</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: أحمد المفسر</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-blue-600">88%</div>
+                                    <div class="text-sm text-gray-500">جيد جداً</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-good rounded-full flex items-center justify-center text-white font-bold">
+                                        🕌
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">السيرة النبوية</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: خالد السيرة</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-blue-600">85%</div>
+                                    <div class="text-sm text-gray-500">جيد جداً</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-good rounded-full flex items-center justify-center text-white font-bold">
+                                        📜
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">الأحاديث</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: سامي الحديث</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-blue-600">87%</div>
+                                    <div class="text-sm text-gray-500">جيد جداً</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-good rounded-full flex items-center justify-center text-white font-bold">
+                                        ⚖️
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">الفقه والعقيدة</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: عبدالله الفقيه</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-blue-600">83%</div>
+                                    <div class="text-sm text-gray-500">جيد جداً</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-average rounded-full flex items-center justify-center text-white font-bold">
+                                        ✍️
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">اللغة العربية</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: عبدالله حسن</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-yellow-600">78%</div>
+                                    <div class="text-sm text-gray-500">جيد</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-good rounded-full flex items-center justify-center text-white font-bold">
+                                        💎
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">الأخلاق الإسلامية</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: يوسف الأخلاق</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-green-600">90%</div>
+                                    <div class="text-sm text-gray-500">ممتاز</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-good rounded-full flex items-center justify-center text-white font-bold">
+                                        🏛️
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">التاريخ الإسلامي</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: حسام التاريخ</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-blue-600">82%</div>
+                                    <div class="text-sm text-gray-500">جيد جداً</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4 space-x-reverse">
+                                    <div class="w-12 h-12 grade-excellent rounded-full flex items-center justify-center text-white font-bold">
+                                        🕌
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">المواظبة على الصلاة</h4>
+                                        <p class="text-sm text-gray-600">الأستاذ: إبراهيم الصلاة</p>
+                                    </div>
+                                </div>
+                                <div class="text-left">
+                                    <div class="text-2xl font-bold text-green-600">98%</div>
+                                    <div class="text-sm text-gray-500">ممتاز</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attendance Tab -->
+                    <div id="attendance-content" class="p-6 hidden">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">سجل الحضور والغياب</h3>
+                        
+                        <!-- Attendance Summary -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-green-50 p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold text-green-600">142</div>
+                                <div class="text-sm text-gray-600">أيام الحضور</div>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold text-red-600">8</div>
+                                <div class="text-sm text-gray-600">أيام الغياب</div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                <div class="text-3xl font-bold text-blue-600">95%</div>
+                                <div class="text-sm text-gray-600">نسبة الحضور</div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Attendance -->
+                        <div class="space-y-3">
+                            <h4 class="font-semibold text-gray-700">آخر 7 أيام</h4>
+                            <div class="grid grid-cols-7 gap-2">
+                                <div class="text-center p-3 bg-green-100 rounded-lg">
+                                    <div class="text-xs text-gray-600">الأحد</div>
+                                    <div class="text-2xl">✅</div>
+                                </div>
+                                <div class="text-center p-3 bg-green-100 rounded-lg">
+                                    <div class="text-xs text-gray-600">الاثنين</div>
+                                    <div class="text-2xl">✅</div>
+                                </div>
+                                <div class="text-center p-3 bg-green-100 rounded-lg">
+                                    <div class="text-xs text-gray-600">الثلاثاء</div>
+                                    <div class="text-2xl">✅</div>
+                                </div>
+                                <div class="text-center p-3 bg-red-100 rounded-lg">
+                                    <div class="text-xs text-gray-600">الأربعاء</div>
+                                    <div class="text-2xl">❌</div>
+                                </div>
+                                <div class="text-center p-3 bg-green-100 rounded-lg">
+                                    <div class="text-xs text-gray-600">الخميس</div>
+                                    <div class="text-2xl">✅</div>
+                                </div>
+                                <div class="text-center p-3 bg-yellow-100 rounded-lg">
+                                    <div class="text-xs text-gray-600">الجمعة</div>
+                                    <div class="text-2xl">🏖️</div>
+                                </div>
+                                <div class="text-center p-3 bg-yellow-100 rounded-lg">
+                                    <div class="text-xs text-gray-600">السبت</div>
+                                    <div class="text-2xl">🏖️</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Behavior Tab -->
+                    <div id="behavior-content" class="p-6 hidden">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">تقييم السلوك</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 bg-green-50 border-r-4 border-green-500 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-semibold text-green-800">تقدير ممتاز في الانضباط</h4>
+                                        <p class="text-sm text-green-600">15 نوفمبر 2024</p>
+                                    </div>
+                                    <span class="text-2xl">⭐</span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-blue-50 border-r-4 border-blue-500 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-semibold text-blue-800">مشاركة فعالة في الأنشطة</h4>
+                                        <p class="text-sm text-blue-600">10 نوفمبر 2024</p>
+                                    </div>
+                                    <span class="text-2xl">🏆</span>
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-yellow-50 border-r-4 border-yellow-500 rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h4 class="font-semibold text-yellow-800">تحذير: التأخير عن الطابور</h4>
+                                        <p class="text-sm text-yellow-600">5 نوفمبر 2024</p>
+                                    </div>
+                                    <span class="text-2xl">⚠️</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Behavior Chart -->
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-700 mb-4">تقييم السلوك الشهري</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-gray-600">الانضباط</span>
+                                    <div class="flex-1 mx-4 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full progress-bar" style="width: 90%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">90%</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-gray-600">التعاون</span>
+                                    <div class="flex-1 mx-4 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full progress-bar" style="width: 85%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">85%</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-gray-600">المشاركة</span>
+                                    <div class="flex-1 mx-4 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full progress-bar" style="width: 88%"></div>
+                                    </div>
+                                    <span class="text-sm font-semibold">88%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activities Tab -->
+                    <div id="activities-content" class="p-6 hidden">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">الأنشطة والمشاركات</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold">الرياضة - كرة القدم</h4>
+                                    <span class="text-2xl">⚽</span>
+                                </div>
+                                <p class="text-sm opacity-90">لاعب أساسي في الفريق</p>
+                                <div class="mt-2 text-xs bg-white bg-opacity-20 px-2 py-1 rounded">
+                                    بطولة المدارس الإسلامية 2024
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold">الرياضة - كرة السلة</h4>
+                                    <span class="text-2xl">🏀</span>
+                                </div>
+                                <p class="text-sm opacity-90">عضو في الفريق الاحتياطي</p>
+                                <div class="mt-2 text-xs bg-white bg-opacity-20 px-2 py-1 rounded">
+                                    تدريبات يومية
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-gradient-to-r from-yellow-500 to-orange-600 text-white rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold">الرحلات التعليمية</h4>
+                                    <span class="text-2xl">🚌</span>
+                                </div>
+                                <p class="text-sm opacity-90">مشارك نشط</p>
+                                <div class="mt-2 text-xs bg-white bg-opacity-20 px-2 py-1 rounded">
+                                    رحلة المسجد النبوي
+                                </div>
+                            </div>
+
+                            <div class="p-4 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold">الرحلات الترفيهية</h4>
+                                    <span class="text-2xl">🏕️</span>
+                                </div>
+                                <p class="text-sm opacity-90">منظم مساعد</p>
+                                <div class="mt-2 text-xs bg-white bg-opacity-20 px-2 py-1 rounded">
+                                    مخيم الشتاء 2024
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="mt-6">
+                            <h4 class="font-semibold text-gray-700 mb-4">الإنجازات والجوائز</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center p-3 bg-yellow-50 rounded-lg">
+                                    <span class="text-2xl ml-3">🥇</span>
+                                    <div>
+                                        <h5 class="font-semibold text-gray-800">المركز الأول في مسابقة الرياضيات</h5>
+                                        <p class="text-sm text-gray-600">مستوى المنطقة التعليمية - أكتوبر 2024</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                                    <span class="text-2xl ml-3">🏆</span>
+                                    <div>
+                                        <h5 class="font-semibold text-gray-800">أفضل لاعب في البطولة</h5>
+                                        <p class="text-sm text-gray-600">بطولة كرة القدم المدرسية - سبتمبر 2024</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">الإشعارات الحديثة</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start p-3 bg-blue-50 rounded-lg notification-unread">
+                            <span class="text-xl ml-3">📢</span>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-blue-800">اجتماع أولياء الأمور</h4>
+                                <p class="text-sm text-blue-600">يوم الخميس الساعة 4:00 مساءً في قاعة المؤتمرات</p>
+                                <span class="text-xs text-gray-500">منذ ساعتين</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start p-3 bg-green-50 rounded-lg">
+                            <span class="text-xl ml-3">✅</span>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-green-800">تم رفع درجات الاختبار</h4>
+                                <p class="text-sm text-green-600">درجات اختبار الرياضيات متاحة الآن</p>
+                                <span class="text-xs text-gray-500">أمس</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start p-3 bg-yellow-50 rounded-lg">
+                            <span class="text-xl ml-3">⏰</span>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-yellow-800">تذكير: موعد تسليم المشروع</h4>
+                                <p class="text-sm text-yellow-600">مشروع الفيزياء يجب تسليمه خلال 3 أيام</p>
+                                <span class="text-xs text-gray-500">منذ يومين</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Form Section -->
+        <div class="mt-8 bg-white rounded-xl card-shadow p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-6">إرسال رسالة</h3>
+            
+            <form onsubmit="sendMessage(event)" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">المرسل إليه</label>
+                        <select id="recipient" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">اختر المرسل إليه</option>
+                            <option value="admin">الإدارة</option>
+                            <option value="quran-teacher-male">أستاذ القرآن الكريم</option>
+                            <option value="quran-teacher-female">أستاذة القرآن الكريم</option>
+                            <option value="arabic-teacher-female">أستاذة اللغة العربية</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">نوع الرسالة</label>
+                        <select id="messageType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">اختر نوع الرسالة</option>
+                            <option value="inquiry">استفسار</option>
+                            <option value="complaint">شكوى</option>
+                            <option value="suggestion">اقتراح</option>
+                            <option value="absence">إعتذار عن غياب</option>
+                            <option value="meeting">طلب موعد</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">موضوع الرسالة</label>
+                    <input type="text" id="subject" placeholder="اكتب موضوع الرسالة هنا..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">محتوى الرسالة</label>
+                    <textarea id="messageContent" rows="5" placeholder="اكتب رسالتك هنا..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2 space-x-reverse">
+                        <input type="checkbox" id="urgent" class="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500">
+                        <label for="urgent" class="text-sm text-gray-700">رسالة عاجلة</label>
+                    </div>
+                    
+                    <div class="flex space-x-3 space-x-reverse">
+                        <button type="button" onclick="clearForm()" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all">
+                            مسح
+                        </button>
+                        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
+                            إرسال الرسالة
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Message Status -->
+            <div id="messageStatus" class="mt-4 hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = ['grades-content', 'attendance-content', 'behavior-content', 'activities-content'];
+            contents.forEach(content => {
+                document.getElementById(content).classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = ['grades-tab', 'attendance-tab', 'behavior-tab', 'activities-tab'];
+            tabs.forEach(tab => {
+                const tabElement = document.getElementById(tab);
+                tabElement.classList.remove('tab-active');
+                tabElement.classList.add('text-gray-600', 'hover:text-blue-600');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+            
+            // Add active class to selected tab
+            const activeTab = document.getElementById(tabName + '-tab');
+            activeTab.classList.add('tab-active');
+            activeTab.classList.remove('text-gray-600', 'hover:text-blue-600');
+        }
+
+        function logout() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                alert('تم تسجيل الخروج بنجاح');
+                // Here you would typically redirect to login page
+            }
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+            
+            const recipient = document.getElementById('recipient').value;
+            const messageType = document.getElementById('messageType').value;
+            const subject = document.getElementById('subject').value;
+            const messageContent = document.getElementById('messageContent').value;
+            const urgent = document.getElementById('urgent').checked;
+            
+            // Validation
+            if (!recipient || !messageType || !subject || !messageContent) {
+                showMessageStatus('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            // Simulate sending message
+            showMessageStatus('جاري إرسال الرسالة...', 'loading');
+            
+            setTimeout(() => {
+                showMessageStatus('تم إرسال الرسالة بنجاح! سيتم الرد عليك في أقرب وقت ممكن.', 'success');
+                clearForm();
+            }, 2000);
+        }
+
+        function clearForm() {
+            document.getElementById('recipient').value = '';
+            document.getElementById('messageType').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('messageContent').value = '';
+            document.getElementById('urgent').checked = false;
+            hideMessageStatus();
+        }
+
+        function showMessageStatus(message, type) {
+            const statusDiv = document.getElementById('messageStatus');
+            statusDiv.className = 'mt-4 p-4 rounded-lg';
+            
+            if (type === 'success') {
+                statusDiv.className += ' bg-green-50 border border-green-200 text-green-800';
+                statusDiv.innerHTML = <div class="flex items-center"><span class="text-xl ml-2">✅</span>${message}</div>;
+            } else if (type === 'error') {
+                statusDiv.className += ' bg-red-50 border border-red-200 text-red-800';
+                statusDiv.innerHTML = <div class="flex items-center"><span class="text-xl ml-2">❌</span>${message}</div>;
+            } else if (type === 'loading') {
+                statusDiv.className += ' bg-blue-50 border border-blue-200 text-blue-800';
+                statusDiv.innerHTML = <div class="flex items-center"><span class="text-xl ml-2 animate-spin">⏳</span>${message}</div>;
+            }
+            
+            statusDiv.classList.remove('hidden');
+        }
+
+        function hideMessageStatus() {
+            document.getElementById('messageStatus').classList.add('hidden');
+        }
+
+        // Initialize progress bars animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ae687a84df038d',t:'MTc1NzE2NjM0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

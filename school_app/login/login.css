@@ -85,3 +85,11 @@ input[type='submit']:hover{
     text-decoration: underline;
     transition: all ease 0.5s;
 }
+
+
+img{
+    width: 20vw;
+    height: auto;
+    border-radius: 50%;
+    
+}

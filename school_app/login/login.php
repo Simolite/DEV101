@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="logo.webp" alt="">
             <section class="welcome">
                 <H1>Welcome to the School Management System</H1>
                 <p>
