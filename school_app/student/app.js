@@ -121,22 +121,6 @@ async function populateMarks() {
 
 }
 
-function darkmode() {
-    const body = document.body;
-    const icon = document.querySelector('#toggel i');
-    const toggel = document.getElementById('toggel');
-
-    body.classList.toggle('dark-mode');
-
-    if (body.classList.contains('dark-mode')) {
-        icon.className = 'fas fa-moon fa-lg';
-        toggel.style.transform = "translateX(1.9vw)";
-    } else {
-        icon.className = 'fas fa-sun fa-lg';
-        toggel.style.transform = "translateX(0vw)";
-    }
-}
-
 
 function resetMarks(){
     if(document.querySelector('table')){
@@ -156,9 +140,7 @@ document.querySelector("#delmarks").addEventListener('click',()=>{
     resetMarks();
 });
 
-document.querySelector("#darkmode").addEventListener('click',()=>{
-    darkmode();
-});
+
 
 let userInfo;
 
@@ -258,9 +240,6 @@ function countUniqueDates(records) {
 }
 getAttInfo();
 
-document.querySelector("#time").addEventListener('click',()=>{
-    toggleSection('time','time_section');
-});
 
 async function getReport(){
     let url = `../api/getReport.php`;

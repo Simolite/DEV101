@@ -148,5 +148,27 @@ function getAccount($conn, $role, $user_id) {
     }
 }
 
+function getStudentTeachers($conn, $student_id){
+    $sql = "
+        SELECT DISTINCT t.id, t.fname, t.lname
+        FROM teachers t
+        JOIN subjects s ON t.id = s.teacher_id
+        JOIN student_subject ss ON s.id = ss.subject_id
+        WHERE ss.student_id = $student_id
+    ";
+
+    $teachers = [];
+    $result = $conn->query($sql);
+
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $teachers[] = $row;
+        }
+    }
+
+    return $teachers;
+}
+
+
 
 ?>
