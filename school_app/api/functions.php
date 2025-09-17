@@ -150,11 +150,11 @@ function getAccount($conn, $role, $user_id) {
 
 function getStudentTeachers($conn, $student_id){
     $sql = "
-        SELECT DISTINCT t.id, t.fname, t.lname
-        FROM teachers t
-        JOIN subjects s ON t.id = s.teacher_id
-        JOIN student_subject ss ON s.id = ss.subject_id
-        WHERE ss.student_id = $student_id
+        SELECT DISTINCT *
+        FROM teachers
+        JOIN subjects ON teachers.id = subjects.id
+        JOIN student_subject ON subjects.id = student_subject.subject_id
+        WHERE student_subject.student_id = $student_id
     ";
 
     $teachers = [];
@@ -167,6 +167,12 @@ function getStudentTeachers($conn, $student_id){
     }
 
     return $teachers;
+}
+
+function sendMessages ($conn,$reciver_id,$reciver_role,$message,$title,$type,$date,$sender_id,$sender_role){
+    $sql = "INSERT INTO `messages`(`sender_id`, `receiver_id`, `message`, `sent_at`, `sender_role`, `receiver_role`, `title`, `type`) VALUES ('$sender_id','$reciver_id','$message','$date','$sender_role','$reciver_role','$title','$type')";
+    $result = $conn->query($sql);
+    return $result;
 }
 
 

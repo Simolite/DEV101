@@ -44,7 +44,6 @@ $class = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $user['lname'] ?> - مدرسة الهجرة</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
         body { font-family: 'Cairo', sans-serif; }
@@ -52,6 +51,7 @@ $class = $result->fetch_assoc();
         .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .selected { background: linear-gradient(45deg, #667eea, #764ba2); color: white; border-radius: 0.5rem 0.5rem 0 0; }
     </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-50">
 
@@ -67,7 +67,7 @@ $class = $result->fetch_assoc();
                     <p class="text-blue-100">لوحة الطالب</p>
                 </div>
             </div>
-            <button onclick="logout()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
+            <button id="logout_btn" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all">
                 تسجيل الخروج
             </button>
         </div>
@@ -164,9 +164,9 @@ $class = $result->fetch_assoc();
     <!-- Timetable -->
     <div class="container mx-auto px-4 mt-8">
         <div class="bg-white rounded-xl card-shadow p-6">
-            <h3 class="text-xl font-bold text-gray-800 mb-6">استعمال الزمن</h3>
+            <h3 class="text-xl font-bold text-gray-800 mb-6">استعمال الزمان</h3>
             <div class="overflow-hidden rounded-lg border border-gray-200 shadow">
-                <img src="<?php echo $url ?>" alt="استعمال الزمن" class="w-full h-auto">
+                <img id="time_table_img" src="<?php echo $url ?>" alt="استعمال الزمن" class="w-full h-auto">
             </div>
         </div>
     </div>
@@ -180,16 +180,14 @@ $class = $result->fetch_assoc();
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">المرسل إليه</label>
                         <select id="recipient" class="w-full p-3 border border-gray-300 rounded-lg">
-                            <option value="">اختر المرسل إليه</option>
+                            <option value="0" selected disabled>اختر المرسل إليه</option>
                             <option value="admin">الإدارة</option>
-                            <option value="quran-teacher">أستاذ القرآن الكريم</option>
-                            <option value="arabic-teacher">أستاذ اللغة العربية</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">نوع الرسالة</label>
                         <select id="messageType" class="w-full p-3 border border-gray-300 rounded-lg">
-                            <option value="">اختر نوع الرسالة</option>
+                            <option value="0" selected disabled>اختر نوع الرسالة</option>
                             <option value="inquiry">استفسار</option>
                             <option value="complaint">شكوى</option>
                             <option value="suggestion">اقتراح</option>
@@ -201,7 +199,7 @@ $class = $result->fetch_assoc();
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">موضوع الرسالة</label>
-                    <input type="text" id="subject" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="اكتب موضوع الرسالة هنا...">
+                    <input type="text" id="message_subject" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="اكتب موضوع الرسالة هنا...">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">محتوى الرسالة</label>
@@ -217,37 +215,6 @@ $class = $result->fetch_assoc();
     </div>
 
     <script src="app.js"></script>
-    <script>
-        function logout() {
-            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
-                window.location.href = "../login/logout.php";
-            }
-        }
-
-        document.getElementById("messageForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const recipient = document.getElementById("recipient").value;
-            const type = document.getElementById("messageType").value;
-            const subject = document.getElementById("subject").value;
-            const content = document.getElementById("messageContent").value;
-            const statusDiv = document.getElementById("messageStatus");
-
-            if (!recipient || !type || !subject || !content) {
-                statusDiv.textContent = "⚠️ يرجى ملء جميع الحقول";
-                statusDiv.className = "mt-4 p-3 bg-red-100 text-red-800 rounded transition-all duration-300";
-                statusDiv.classList.remove("hidden");
-                return;
-            }
-
-            statusDiv.textContent = "⏳ جاري إرسال الرسالة...";
-            statusDiv.className = "mt-4 p-3 bg-blue-100 text-blue-800 rounded transition-all duration-300";
-            statusDiv.classList.remove("hidden");
-
-            setTimeout(() => {
-                statusDiv.textContent = "✅ تم إرسال الرسالة بنجاح!";
-                statusDiv.className = "mt-4 p-3 bg-green-100 text-green-800 rounded transition-all duration-300";
-            }, 2000);
-        });
-    </script>
+    <script src="tailwindcss.js"></script>
 </body>
 </html>

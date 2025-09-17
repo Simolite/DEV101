@@ -17,3 +17,12 @@ table ,td,th{
     padding: 1vw;
     text-align: center;
 }
+
+#marks_table {
+    width: 100%;
+    align-self: center;
+}
+
+#term ,#subject{
+    width: 20%;
+}

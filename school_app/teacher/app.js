@@ -1,25 +1,4 @@
-function darkmode() {
-    const body = document.body;
-    const icon = document.querySelector('#toggel i');
-    const toggel = document.getElementById('toggel');
 
-    body.classList.toggle('dark-mode');
-
-    if (body.classList.contains('dark-mode')) {
-        icon.className = 'fas fa-moon fa-lg';
-        toggel.style.transform = "translateX(1.9vw)";
-        body.style.color = "#fff";
-    } else {
-        icon.className = 'fas fa-sun fa-lg';
-        toggel.style.transform = "translateX(0vw)";
-        body.style.color = "#000";
-    }
-}
-
-
-document.querySelector("#darkmode").addEventListener('click',()=>{
-    darkmode();
-});
 
 
 
@@ -109,38 +88,40 @@ getClasses('Markclass');
 getClasses('Attclass');
 
 
-document.querySelector("#Markclass").addEventListener('change',()=>{
-    let lists = document.getElementById('Markinput');
-    Array.from(lists.children).forEach(list => {
-        if(list.id != 'Markclass'){
-            Array.from(list.children).forEach(option => {
-                if (option.value != "0") {
-                    option.remove();
-                }
-            });
-        }
+// Marks select change
+document.querySelector("#Markclass").addEventListener('change', () => {
+    let lists = document.querySelector("#Markinput");
+    if (lists) {
+        Array.from(lists.children).forEach(list => {
+            if (list.tagName === 'SELECT' && list.id !== 'Markclass') {
+                Array.from(list.options).forEach(option => {
+                    if (option.value != "0") option.remove();
+                });
+            }
+        });
+    }
 
-    })
     getSubjets("Marksubject");
     getStudents("Markclass");
     getTerms();
 });
 
+// Attendance select change
+document.querySelector("#Attclass").addEventListener('change', () => {
+    let lists = document.querySelector("#Attinput");
+    if (lists) {
+        Array.from(lists.children).forEach(list => {
+            if (list.tagName === 'SELECT' && list.id !== 'Attclass') {
+                Array.from(list.options).forEach(option => {
+                    if (option.value != "0") option.remove();
+                });
+            }
+        });
+    }
 
-document.querySelector("#Attclass").addEventListener('change',()=>{
-    let lists = document.getElementById('Attinput');
-    Array.from(lists.children).forEach(list => {
-        if(list.id != 'Attclass'){
-            Array.from(list.children).forEach(option => {
-                if (option.value != "0") {
-                    option.remove();
-                }
-            });
-        }
-
-    })
     getSubjets("Attsub");
 });
+
 
 async function attendanceList(){
     let students = await getStudents("Attclass");
@@ -166,6 +147,12 @@ async function attendanceList(){
 }
 
 document.getElementById('getAttList').addEventListener('click',()=>{
+    let Attclass = document.getElementById("Attclass").value;
+    let Attsub = document.getElementById("Attsub").value;
+    if(Attclass == 0||Attsub ==0){
+        alert("Please fill the class and subject");
+        return;
+    }
     attendanceList();
 });
 
@@ -189,7 +176,6 @@ function addMark() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data); 
         if (data.error) {
             alert("Error: " + data.error);
         } else {
@@ -201,6 +187,16 @@ function addMark() {
 
 
 document.querySelector('#Marksubmit').addEventListener('click', () => {
+    let Markclass = document.getElementById("Markclass").value;
+    let Marksubject = document.getElementById("Marksubject").value;
+    let student = document.getElementById("student").value;
+    let term = document.getElementById("term").value;
+    let Markdate = document.getElementById("Markdate").value;
+    let mark = document.getElementById("mark").value;
+    if (!Markclass ||!Marksubject ||!student ||!term ||!Markdate ||!mark){
+        alert("Please fill all the fields");
+        return;
+    }
     addMark();
 });
 
@@ -343,5 +339,16 @@ function addAtt(){
 
 
 document.querySelector("#submitAtt").addEventListener('click',()=>{
+    let date = document.getElementById('Attdate').value;
+    if(!date){
+        alert('Please select a date ');
+        return;
+    }
     addAtt();
+    alert("attandance added seccsufully")
 });
+
+
+document.getElementById("time_table_img").addEventListener('click',()=>{
+    window.location.href = document.getElementById("time_table_img").src;
+})

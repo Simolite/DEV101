@@ -18,13 +18,7 @@ if ($conn->connect_error) {
     exit;
 }
 
-if (!isset($_GET['id'])) {
-    echo json_encode(['error' => 'id is required']);
-    exit;
-}
-
-$student_id = intval($_GET['id']);
-$teachers = getStudentTeachers($conn, $student_id);
+$teachers = getStudentTeachers($conn, $_SESSION['linked_id']);
 
 echo json_encode($teachers);
 ?>
