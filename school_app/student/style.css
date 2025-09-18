@@ -2,16 +2,6 @@ select{
     text-align: center;
 }
 
-#student_card{
-    display: flex;
-    flex-direction: column;
-    gap: 1vw;
-}
-#student_card div {
-    border-bottom: solid 1px #e0e0e0;
-    padding-bottom: 1vw;
-}
-
 table ,td,th{
     border: solid 1px #ccc;
     padding: 1vw;

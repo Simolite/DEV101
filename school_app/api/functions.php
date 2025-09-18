@@ -80,6 +80,8 @@ function getAnnouncements($conn,$audience,$class_id=0){
     $announcements = [];
     if($class_id==0){
         $sql = "SELECT * FROM announcements WHERE audience = '$audience'";
+    }elseif($class_id=='all'){
+        $sql = "SELECT * FROM announcements";
     }else{
         $sql = "SELECT * FROM announcements WHERE audience = '$audience' OR class_id = $class_id";
     }
@@ -176,5 +178,32 @@ function sendMessages ($conn,$reciver_id,$reciver_role,$message,$title,$type,$da
 }
 
 
+function getMessages($conn,$id,$role){
+    $sql = "SELECT 
+    m.*, 
+    CASE 
+        WHEN m.sender_role = 'student' THEN CONCAT(s.fname, ' ', s.lname)
+        WHEN m.sender_role = 'teacher' THEN CONCAT(t.fname, ' ', t.lname)
+        WHEN m.sender_role = 'admin' THEN CONCAT(a.fname, ' ', a.lname)
+    END AS sender_name
+FROM messages m
+LEFT JOIN students s ON m.sender_role = 'student' AND m.sender_id = s.id
+LEFT JOIN teachers t ON m.sender_role = 'teacher' AND m.sender_id = t.id
+LEFT JOIN admins a ON m.sender_role = 'admin' AND m.sender_id = a.id
+WHERE m.receiver_role = '$role' AND m.receiver_id = $id;";
+    $result = $conn->query($sql);
+    $messages = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $messages[] = $row;
+        }
+    }
+    return $messages;
+};
 
+
+function dellAnnouncement($conn,$id){
+    $sql = "DELETE FROM announcements WHERE `announcements`.`id` = $id";
+    $conn->query($sql);
+}
 ?>

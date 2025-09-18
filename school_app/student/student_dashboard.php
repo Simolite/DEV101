@@ -83,7 +83,7 @@ $class = $result->fetch_assoc();
                 <h2 class="text-2xl font-bold text-gray-800"><?php echo $user['fname'].' '.$user['lname'] ?></h2>
                 <p class="text-blue-600 font-semibold"><?php echo $class['name'] ?></p>
                 <div class="space-y-2 mt-6 text-right text-sm divide-y divide-gray-100">
-                    <div class="flex justify-between"><span>رقم الطالب:</span><span><?php echo $user['id'] ?></span></div>
+                    <div class="flex justify-between"><span>رقم الطالب:</span><span><?php echo $user['id']?></span></div>
                     <div class="flex justify-between"><span>البريد:</span><span><?php echo $user['email'] ?></span></div>
                     <div class="flex justify-between"><span>الجنس:</span><span><?php echo $user['sex'] ?></span></div>
                     <div class="flex justify-between"><span>تاريخ الازدياد:</span><span><?php echo $user['birth_date'] ?></span></div>
@@ -98,15 +98,16 @@ $class = $result->fetch_assoc();
             <!-- Navigation Tabs -->
             <div class="bg-white rounded-xl card-shadow">
                 <div class="flex border-b border-gray-200">
-                    <button id="marks" class="selected px-6 py-4 font-semibold">الدرجات</button>
+                    <button id="notifaction" class="selected px-6 py-4 font-semibold text-gray-600 hover:text-blue-600">الإشعارات</button>
+                    <button id="marks" class=" px-6 py-4 font-semibold">الدرجات</button>
                     <button id="attendance" class="px-6 py-4 font-semibold text-gray-600 hover:text-blue-600">الحضور</button>
-                    <button id="notifaction" class="px-6 py-4 font-semibold text-gray-600 hover:text-blue-600">الإشعارات</button>
                     <button id="report" class="px-6 py-4 font-semibold text-gray-600 hover:text-blue-600">التقارير</button>
+                    <button id="messages" class="px-6 py-4 font-semibold text-gray-600 hover:text-blue-600">الرسائل</button>
                 </div>
             </div>
 
             <!-- Marks Section -->
-            <main id="marks_section" class="bg-white rounded-xl card-shadow p-6">
+            <main id="marks_section" class="bg-white rounded-xl card-shadow p-6 hidden">
                 <h3 class="text-xl font-bold text-gray-800 mb-6">الدرجات</h3>
                 <div class="flex space-x-4 space-x-reverse mb-6">
                     <select id="term" class="border p-2 rounded"></select>
@@ -130,7 +131,7 @@ $class = $result->fetch_assoc();
             </main>
 
             <!-- Notifications Section -->
-            <main id="notifactions_section" class="bg-white rounded-xl card-shadow p-6 hidden">
+            <main id="notifactions_section" class="bg-white rounded-xl card-shadow p-6 ">
                 <h3 class="text-xl font-bold text-gray-800 mb-6">الإشعارات</h3>
                 <table class="w-full border">
                     <thead class="bg-gray-100">
@@ -138,6 +139,28 @@ $class = $result->fetch_assoc();
                     </thead>
                     <tbody></tbody>
                 </table>
+            </main>
+
+            
+            <main id="messages_section" class="bg-white rounded-xl card-shadow p-6 hidden">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">الرسائل</h3>
+                <div class="mb-8">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-4">📩 الرسائل الواردة</h4>
+                    <table class="w-full border">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="p-2">المرسل</th>
+                                <th class="p-2">العنوان</th>
+                                <th class="p-2">الموضوع</th>
+                                <th class="p-2">النوع</th>
+                                <th class="p-2">التاريخ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="messagesList">
+                            <!-- Messages will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
             </main>
 
             <!-- Report Section -->

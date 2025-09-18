@@ -220,6 +220,41 @@ document.querySelector("#notifaction").addEventListener('click',()=>{
     toggleSection('notifaction','notifactions_section');
 });
 
+document.querySelector("#messages").addEventListener('click',()=>{
+    toggleSection('messages','messages_section');
+});
+
+
+async function getMessages(){
+    let url = '../api/getMessages.php';
+    let data;
+    try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        data = await response.json();
+    } catch (error) {
+        console.error("Error fetching messages:", error?.message || error);
+    }
+    let tbody = document.getElementById("messagesList");
+    data.forEach(message =>{
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+        let td4 = document.createElement('td');
+        let td5 = document.createElement('td');
+        td1.innerText = message.sender_name + " ( " +message.sender_role + " )";
+        td2.innerText = message.title;
+        td3.innerText = message.message;
+        td4.innerText = message.type;
+        td5.innerText = message.sent_at;
+        tr.append(td1,td2,td3,td4,td5);
+        tbody.appendChild(tr);
+    });
+    
+}
+
+ getMessages();
+
 
 
 let userInfo;
@@ -282,9 +317,6 @@ document.querySelector("#notifaction").addEventListener('click',()=>{
 });
 document.querySelector("#attendance").addEventListener('click',()=>{
     toggleSection('attendance','attendance_section');
-});
-document.querySelector("#time").addEventListener('click',()=>{
-    toggleSection('time','time_section');
 });
 
 
@@ -351,4 +383,140 @@ document.querySelector("#submitAtt").addEventListener('click',()=>{
 
 document.getElementById("time_table_img").addEventListener('click',()=>{
     window.location.href = document.getElementById("time_table_img").src;
+});
+
+
+async function sendMessagesRoleRef(){
+    let recipient_role = document.getElementById("recipient_role");
+    let recipient_class = document.getElementById("recipient_class");
+    let recipient = document.getElementById("recipient");
+    let Srecipient = document.getElementById("Srecipient");
+    if(recipient_class.parentElement.classList.contains('hidden')){
+        recipient_class.parentElement.classList.remove("hidden");
+    };
+    if(recipient.parentElement.classList.contains('hidden')){
+        recipient.parentElement.classList.remove("hidden");
+    };
+    if(Srecipient.parentElement.classList.contains('hidden')){
+        Srecipient.parentElement.classList.remove("hidden");
+    };
+    if(recipient_role.value == 'admin'){
+        recipient_class.parentElement.classList.add("hidden");
+        recipient.parentElement.classList.add("hidden");
+        Srecipient.parentElement.classList.add("hidden");
+    }else if (recipient_role.value == 'teacher'){
+        recipient_class.parentElement.classList.add("hidden");
+        Srecipient.parentElement.classList.add("hidden");
+    }else if (recipient_role.value == 'student'){
+        recipient.parentElement.classList.add("hidden");
+        let classes = await getTeacherClasses();
+        classes.forEach(Tclass =>{
+            let option = document.createElement('option');
+            option.innerText = Tclass.name;
+            option.value = Tclass.id;
+            recipient_class.appendChild(option);
+        })
+    }
+}
+
+document.getElementById("recipient_role").addEventListener("change",()=>{
+    sendMessagesRoleRef();
+});
+
+async function sendMessagesClassRef() {
+    let Srecipient = document.getElementById('Srecipient');
+
+    Array.from(Srecipient.children).forEach(stud => {
+        if (stud.value != 0) {
+            stud.remove();
+        }
+    });
+
+     let students = await getClassStudents(document.getElementById("recipient_class").value);
+    
+
+    students.forEach(stud => {
+        let option = document.createElement("option");
+        option.text = stud.fname + ' ' + stud.lname;
+        option.value = stud.id;
+        Srecipient.appendChild(option);
+    });
+}
+
+document.getElementById("recipient_class").addEventListener("change",()=>{
+    sendMessagesClassRef();
+});
+
+async function getClassStudents(class_id){
+    let url = `../api/getClassStudents.php?class_id=${class_id}`;
+    let data;
+    
+    try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        data = await response.json();
+    } catch (error) {
+        console.error("Error fetching students:", error?.message || error);
+    }
+    return data;
+};
+
+async function getTeacherClasses() {
+
+    let url = `../api/getTeacherClasses.php`;
+    let data;
+    
+    try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        data = await response.json();
+    } catch (error) {
+        console.error("Error fetching classes:", error?.message || error);
+    }
+    return data;
+
+}
+
+async function sendMessage(){
+    let reciver_role = document.getElementById("recipient_role").value;
+    let reciver_id;
+    let message;
+    let title;
+    let type;
+    if(reciver_role == 'admin'){
+        reciver_id = 1;
+    }else if (reciver_role == 'teacher'){
+        reciver_id = document.getElementById("recipient").value;
+    }else if (reciver_role == 'student'){
+        reciver_id = document.getElementById("Srecipient").value;
+    }
+    message = document.getElementById("messageContent").value;
+    title = document.getElementById("message_subject").value;
+    type = document.getElementById("messageType").value;
+    console.log(reciver_role,reciver_id,message,title,type);
+
+
+    const url = "../api/sendMessages.php";
+
+    const formData = new FormData();
+    formData.append("reciver_id", reciver_id);
+    formData.append("reciver_role", reciver_role);
+    formData.append("message", message);
+    formData.append("title", title);
+    formData.append("type", type);
+
+    let data;
+    try {
+    let response = await fetch(url, {
+        method: "POST",
+        body: formData
+    });
+
+    data = await response.json();
+    } catch (error) {
+    console.error("Error sending message:", error?.message || error);
+    }
+}
+
+document.getElementById("submitMessage").addEventListener("click", (e)=>{
+    e.preventDefault();
+    sendMessage();
 })

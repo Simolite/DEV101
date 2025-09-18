@@ -1,26 +1,3 @@
-function darkmode() {
-    const body = document.body;
-    const icon = document.querySelector('#toggel i');
-    const toggel = document.getElementById('toggel');
-
-    body.classList.toggle('dark-mode');
-
-    if (body.classList.contains('dark-mode')) {
-        icon.className = 'fas fa-moon fa-lg';
-        toggel.style.transform = "translateX(1.9vw)";
-        body.style.color = "#fff";
-    } else {
-        icon.className = 'fas fa-sun fa-lg';
-        toggel.style.transform = "translateX(0vw)";
-        body.style.color = "#000";
-    }
-}
-
-
-document.querySelector("#darkmode").addEventListener('click',()=>{
-    darkmode();
-});
-
 async function getUserInfo() {
     let url = `../api/getUserInfo.php`;
     
@@ -33,31 +10,79 @@ async function getUserInfo() {
     }
 }
 
-async function getAnnouncements(){
+async function getAnnouncements() {
     await getUserInfo();
-    let url = `../api/getAnnouncements.php?audience=all`;
-    let data;
+    const url = `../api/getAnnouncements.php?audience=all&class_id=all`;
+    let data = [];
+
     try {
-        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
         data = await response.json();
     } catch (error) {
         console.error("Error fetching Announcements:", error?.message || error);
-    };
-    let tbody = document.querySelector("#notifaction_section tbody");
-    data.forEach(announ =>{
-        let tr = document.createElement('tr');
-        let td1 = document.createElement('td');
-        let td2 = document.createElement('td');
-        let td3 = document.createElement('td');
+    }
+
+    const tbody = document.querySelector("#notifaction_section tbody");
+    tbody.innerHTML = '';
+
+    data.forEach(announ => {
+        const tr = document.createElement('tr');
+
+        const td1 = document.createElement('td');
         td1.innerText = announ.title;
+
+        const td2 = document.createElement('td');
         td2.innerText = announ.body;
+
+        const td3 = document.createElement('td');
         td3.innerText = announ.created_at;
-        tr.append(td1,td2,td3);
+
+        const td4 = document.createElement('td');
+        const btnDelete = document.createElement('button');
+        btnDelete.innerText = "حذف";
+        btnDelete.className = "bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600";
+
+        btnDelete.addEventListener('click', async () => {
+            if (confirm("هل أنت متأكد من حذف هذا الإعلان؟")) {
+                try {
+                    const deleteUrl = `../api/deleteAnnouncement.php?id=${announ.id}`;
+                    const res = await fetch(deleteUrl, { method: 'GET' }); 
+                    const result = await res.json();
+                    if (result ==200) {
+                        tr.remove(); 
+                    } else {
+                        alert(result.error || "حدث خطأ أثناء الحذف.");
+                    }
+                } catch (err) {
+                    console.error("Error deleting announcement:", err);
+                }
+            }
+        });
+
+        td4.appendChild(btnDelete);
+        tr.append(td1, td2, td3, td4);
         tbody.appendChild(tr);
-    }) 
+    });
 }
 
-getAnnouncements();
+
+async function getAccounts(){
+    let role = document.querySelector("#accRole").value;    
+    let accounts;
+    let url = `../api/getAccount.php?role=${encodeURIComponent(role)}`;
+    try {
+        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });       
+        accounts = await response.json();
+    } catch (error) {
+        console.error("Error fetching Account:", error?.message || error);
+    }
+    let list = document.querySelector("select#account");
+    accounts.forEach(account=>{
+        let option = document.createElement("option");
+        option.innerText = account.username;
+        list.append(option);
+    })
+}
 
 function toggleSection(id){
     document.querySelector('.selected').classList.remove("selected");
@@ -106,25 +131,103 @@ document.querySelector("#term").addEventListener('click',()=>{
     toggleSection('term');
 });
 
+document.querySelector("#messages").addEventListener('click',()=>{
+    toggleSection('messages');
+});
 
-async function getAccounts(){
-    let role = document.querySelector("#accRole").value;    
-    let accounts;
-    let url = `../api/getAccount.php?role=${encodeURIComponent(role)}`;
-    try {
-        let response = await fetch(url, { headers: { 'Accept': 'application/json' } });       
-        accounts = await response.json();
-    } catch (error) {
-        console.error("Error fetching Account:", error?.message || error);
-    }
-    let list = document.querySelector("select#account");
-    accounts.forEach(account=>{
-        let option = document.createElement("option");
-        option.innerText = account.username;
-        list.append(option);
-    })
-}
+document.querySelector("#parents").addEventListener('click',()=>{
+    toggleSection('parents');
+});
+
+document.querySelector("#classes").addEventListener('click',()=>{
+    toggleSection('classes');
+});
 
 document.querySelector("#accRole").addEventListener("change",()=>{
     getAccounts();
+});
+
+
+getAnnouncements();
+
+const targetSelect = document.getElementById('target');
+const container = document.getElementById('dynamicContainer');
+
+// Clear dynamic selects
+function clearDynamicSelects() {
+    container.innerHTML = '';
+}
+
+// Create styled select
+function createSelect(id, placeholder) {
+    const select = document.createElement('select');
+    select.id = id;
+    select.className = "dynamic-select w-full p-2 border border-gray-300 rounded-md bg-white text-gray-700 font-medium " +
+                       "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 " +
+                       "hover:border-blue-400 transition-colors mt-2";
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = "0";
+    defaultOption.selected = true;
+    defaultOption.disabled = true;
+    defaultOption.innerText = placeholder;
+
+    select.appendChild(defaultOption);
+    return select;
+}
+
+
+// Fetch options from API
+async function fetchOptions(apiUrl, select, labelKey = 'name') {
+    try {
+        const res = await fetch(apiUrl, { headers: { 'Accept': 'application/json' } });
+        const data = await res.json();
+        data.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item.id;
+            opt.innerText = item[labelKey];
+            select.appendChild(opt);
+        });
+    } catch (err) {
+        console.error("Error fetching options:", err);
+    }
+}
+
+// Handle target change
+targetSelect.addEventListener('change', async () => {
+    clearDynamicSelects();
+    const value = targetSelect.value;
+
+    if (value === "teachers") {
+        const teacherSelect = createSelect('teacherSelect', 'اختر الأستاذ');
+        container.appendChild(teacherSelect);
+        await fetchOptions('../api/getTeachers.php', teacherSelect);
+    }
+
+    if (value === "classes") {
+        const classSelect = createSelect('classSelect', 'اختر القسم');
+        container.appendChild(classSelect);
+        await fetchOptions('../api/getClasses.php', classSelect);
+    }
+
+    if (value === "students") {
+        const classSelect = createSelect('studentClassSelect', 'اختر القسم');
+        container.appendChild(classSelect);
+        await fetchOptions('../api/getClasses.php', classSelect);
+
+        const studentSelect = createSelect('studentSelect', 'اختر الطالب');
+        container.appendChild(studentSelect);
+
+        classSelect.addEventListener('change', async () => {
+            studentSelect.innerHTML = '';
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "0";
+            defaultOption.selected = true;
+            defaultOption.disabled = true;
+            defaultOption.innerText = "اختر الطالب";
+            studentSelect.appendChild(defaultOption);
+
+            await fetchOptions(`../api/getStudents.php?class_id=${classSelect.value}`, studentSelect);
+        });
+    }
 });
