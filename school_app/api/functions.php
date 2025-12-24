@@ -172,7 +172,7 @@ function getStudentTeachers($conn, $student_id){
 }
 
 function sendMessages ($conn,$reciver_id,$reciver_role,$message,$title,$type,$date,$sender_id,$sender_role){
-    $sql = "INSERT INTO `messages`(`sender_id`, `receiver_id`, `message`, `sent_at`, `sender_role`, `receiver_role`, `title`, `type`) VALUES ('$sender_id','$reciver_id','$message','$date','$sender_role','$reciver_role','$title','$type')";
+    $sql = "INSERT INTO `messages`(`sender_id`, `receiver_id`, `message`, `sent_at`, `sender_role`, `receiver_role`, `title`, `type`) VALUES ($sender_id,$reciver_id,'$message','$date','$sender_role','$reciver_role','$title','$type')";
     $result = $conn->query($sql);
     return $result;
 }

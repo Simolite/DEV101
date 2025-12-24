@@ -505,14 +505,12 @@ async function sendMessage(){
 
     let data;
     try {
-    let response = await fetch(url, {
+        await fetch(url, {
         method: "POST",
         body: formData
-    });
-
-    data = await response.json();
+    });    
     } catch (error) {
-    console.error("Error sending message:", error?.message || error);
+        console.error("Error sending message:", error?.message || error);
     }
 }
 
